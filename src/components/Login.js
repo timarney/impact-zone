@@ -1,94 +1,11 @@
 import React from "react";
-import App from "../App";
-import Reset from "./Reset";
-import firebase from "../config-firebase.js";
-
 import {
-  BrowserRouter as Router,
   Redirect,
-  Route,
-  withRouter,
   Link
 } from "react-router-dom";
+
+import { Auth } from "./Auth";
 import LoginForm from "./LoginForm";
-
-export const Auth = {
-  isAuthenticated: false,
-  authenticate(cb, user) {
-    const self = this;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(user.email, user.pass)
-      .then(response => {
-        console.log("lets go", response);
-        console.log(cb);
-        self.isAuthenticated = true;
-        cb(null);
-      })
-      .catch(function(error) {
-        self.isAuthenticated = false;
-        cb(error);
-      });
-  },
-  signout(cb) {
-    this.isAuthenticated = false;
-    firebase
-      .auth()
-      .signOut()
-      .then(function() {
-        cb();
-      })
-      .catch(function(error) {
-        console.log("signout err", error);
-        cb(error);
-      });
-  }
-};
-
-export const AuthExample = () => (
-  <Router>
-    <div>
-      <AuthButton />
-      <Route exact path="/" component={Login} />
-      <Route exact path="/reset" component={Reset} />
-      <PrivateRoute path="/app" component={App} />
-    </div>
-  </Router>
-);
-
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      Auth.isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);
-
-export const AuthButton = withRouter(
-  ({ history }) =>
-    Auth.isAuthenticated ? (
-      <p>
-        Welcome!{" "}
-        <button
-          onClick={() => {
-            Auth.signout(() => history.push("/"));
-          }}
-        >
-          Sign out
-        </button>
-      </p>
-    ) : null
-);
 
 export class Login extends React.Component {
   state = {

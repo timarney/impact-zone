@@ -6,8 +6,7 @@ class Reset extends Component {
   render() {
     return (
       <div className="login-wrap">
-        {" "}
-        <ResetForm />{" "}
+        <ResetForm />
       </div>
     );
   }

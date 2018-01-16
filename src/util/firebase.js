@@ -38,18 +38,20 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
-/*
 // this will handle password reset
 
-var auth = firebase.auth();
-var emailAddress = "user@example.com";
+export function resetPassword(email, cb) {
+  const auth = firebase.auth();
 
-auth.sendPasswordResetEmail(emailAddress).then(function() {
-  // Email sent.
-}).catch(function(error) {
-  // An error happened.
-});
-*/
+  auth
+    .sendPasswordResetEmail(email)
+    .then(function() {
+      cb("email sent");
+    })
+    .catch(function(error) {
+      cb(error);
+    });
+}
 
 export function removeRef(id) {
   if (window.confirm("Do you really want to remove?")) {

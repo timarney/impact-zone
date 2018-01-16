@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AuthExample } from "./components/Login";
+import { Routes } from "./components/Routes";
 import "./index.css";
 
 import registerServiceWorker from "./registerServiceWorker";
 
 // ReactDOM.render(<App />, document.getElementById("root"));
-ReactDOM.render(<AuthExample />, document.getElementById("root"));
+ReactDOM.render(<Routes />, document.getElementById("root"));
 registerServiceWorker();

@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import WarningIcon from "../icons/Warning";
+import { resetPassword } from "../util/firebase";
 
 class ResetForm extends Component {
   clearFields = () => {};
 
   handleSubmit = event => {
     event.preventDefault();
-    const { onSubmit } = this.props;
 
     const email = this.email.value;
-    alert(email);
+    resetPassword(email, response => {
+      console.log(response);
+    });
   };
 
   render() {
