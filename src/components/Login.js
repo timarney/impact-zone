@@ -1,5 +1,6 @@
 import React from "react";
 import App from "../App";
+import Reset from "./Reset";
 import firebase from "../config-firebase.js";
 
 import {
@@ -15,7 +16,6 @@ export const Auth = {
   isAuthenticated: false,
   authenticate(cb, user) {
     const self = this;
-
     firebase
       .auth()
       .signInWithEmailAndPassword(user.email, user.pass)
@@ -50,6 +50,7 @@ export const AuthExample = () => (
     <div>
       <AuthButton />
       <Route exact path="/" component={Login} />
+      <Route exact path="/reset" component={Reset} />
       <PrivateRoute path="/app" component={App} />
     </div>
   </Router>
