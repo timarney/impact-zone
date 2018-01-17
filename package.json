@@ -2,7 +2,6 @@
   "name": "stats",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://impact-zone.line37.com/stats",
   "dependencies": {
     "animated": "^0.2.1",
     "classnames": "^2.2.5",
