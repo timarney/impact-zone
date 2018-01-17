@@ -3,23 +3,43 @@ import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { Stats } from "./stats/Stats";
 import { Login, Reset, Auth } from "./auth";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      Auth.isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location }
+class PrivateRoute extends React.Component {
+  state = {
+    loading: true,
+    isAuthenticated: false
+  };
+  async componentDidMount() {
+    let isAuthenticated = await Auth.checkAuth();
+    this.setState({
+      loading: false,
+      isAuthenticated
+    });
+  }
+  render() {
+    const { component: Component, ...rest } = this.props;
+    if (this.state.loading) {
+      return <div>LOADING</div>;
+    } else {
+      return (
+        <Route
+          {...rest}
+          render={props => {
+            return !this.state.isAuthenticated ? (
+              <Redirect
+                to={{
+                  pathname: "/",
+                  state: { from: props.location }
+                }}
+              />
+            ) : (
+              <Component {...this.props} />
+            );
           }}
         />
-      )
+      );
     }
-  />
-);
+  }
+}
 
 export const Routes = () => (
   <Router>

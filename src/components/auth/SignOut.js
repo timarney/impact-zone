@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 export const SignOut = withRouter(
   ({ history }) =>
-    Auth.isAuthenticated ? (
+    Auth.checkAuth() ? (
       <p className="sign-out">
         <button
           className="btn"

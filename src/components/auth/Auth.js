@@ -1,33 +1,14 @@
-import firebase from "../../config-firebase.js";
+import { isLoggedIn, login, signout } from "../../util/firebase";
 
 export const Auth = {
-  isAuthenticated: false,
+  async checkAuth() {
+    let user = await isLoggedIn();
+    return user;
+  },
   authenticate(cb, user) {
-    const self = this;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(user.email, user.pass)
-      .then(response => {
-        self.isAuthenticated = true;
-        cb(null);
-      })
-      .catch(function(error) {
-        self.isAuthenticated = false;
-        console.error(error.message);
-        cb(error);
-      });
+    login(cb, user);
   },
   signout(cb) {
-    this.isAuthenticated = false;
-    firebase
-      .auth()
-      .signOut()
-      .then(function() {
-        cb();
-      })
-      .catch(function(error) {
-        console.log("signout err", error);
-        cb(error);
-      });
+    signout(cb);
   }
 };

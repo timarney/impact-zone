@@ -1,10 +1,14 @@
 import firebase from "../config-firebase.js";
 
-export function watchRef(id, cb) {
+export async function watchRef(id, cb) {
   if (!id) {
     console.warn("no location passed");
     return;
   }
+
+  let user = await isLoggedIn();
+
+  if (!user) return;
 
   const ref = firebase.database().ref(id);
 
@@ -20,19 +24,51 @@ export function watchRef(id, cb) {
       cb(null, items);
     },
     e => {
-      console.log(e);
+      if (e.code === "PERMISSION_DENIED") {
+        ref.off();
+        return;
+      }
+      console.log(e.message);
     }
   );
 }
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    //
-  } else {
-    console.log("No user is signed in.");
-    // No user is signed in.
-  }
-});
+export async function isLoggedIn() {
+  return new Promise(resolve => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    });
+  });
+}
+
+export function login(cb, user) {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(user.email, user.pass)
+    .then(response => {
+      cb(null);
+    })
+    .catch(function(error) {
+      cb(error);
+    });
+}
+
+export function signout(cb) {
+  firebase
+    .auth()
+    .signOut()
+    .then(function() {
+      cb();
+    })
+    .catch(function(error) {
+      console.log("signout err", error);
+      cb(error);
+    });
+}
 
 // this will handle password reset
 

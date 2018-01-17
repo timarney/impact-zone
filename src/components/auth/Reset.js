@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import ResetForm from "./ResetForm";
-import { resetPassword } from "../../util/firebase";
-
 import { Redirect } from "react-router-dom";
+import { resetPassword } from "../../util/firebase";
 
 export class Reset extends Component {
   state = { err: null, success: null };
