@@ -111,3 +111,14 @@
   justify-content: flex-end;
   padding-right: 20px;
 }
+
+.details-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-details {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}

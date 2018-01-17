@@ -6,16 +6,16 @@
     "animated": "^0.2.1",
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.2",
-    "firebase": "^4.6.2",
+    "firebase": "^4.8.2",
     "lodash.sortbyorder": "^3.4.4",
-    "luxon": "^0.2.3",
+    "luxon": "^0.3.1",
     "prop-types": "^15.6.0",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17",
-    "victory": "^0.24.2"
+    "react-scripts": "1.1.0",
+    "victory": "^0.24.5"
   },
   "scripts": {
     "start": "react-scripts start",

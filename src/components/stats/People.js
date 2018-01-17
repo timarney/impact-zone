@@ -72,6 +72,7 @@ class People extends Component {
     let { animation } = this.state;
     let y = this.el.getBoundingClientRect();
     let x = e.getBoundingClientRect();
+
     detailsBoxTransition(x, y, animation, "up");
 
     this.setState({ activePerson: person });
@@ -83,7 +84,9 @@ class People extends Component {
 
     if (!x) return;
 
-    detailsBoxTransition(null, x, animation);
+    detailsBoxTransition(null, x, animation, null, () => {
+      animation.y.setValue(-500);
+    });
   };
 
   personDetails = () => {
@@ -101,7 +104,7 @@ class People extends Component {
           ✘
         </span>
       );
-      
+
       // eslint-disable-next-line
       for (let [k, v] of Object.entries(obj)) {
         if (v.name === person.name) {
@@ -128,8 +131,14 @@ class People extends Component {
 
     return (
       <div>
-        <h2>{person.name} </h2>
-        {d.reverse()}
+        <div>
+          <div className="close-details" />
+          <div className="details-header">
+            <h2>{person.name}</h2>
+            <button onClick={this.closeDetails}>CLOSE</button>
+          </div>
+          {d.reverse()}
+        </div>
       </div>
     );
   };
