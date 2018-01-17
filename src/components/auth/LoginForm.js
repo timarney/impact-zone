@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import WarningIcon from "../icons/Warning";
-import { resetPassword } from "../util/firebase";
+import WarningIcon from "../../icons/Warning";
 
-class ResetForm extends Component {
+class LoginForm extends Component {
   clearFields = () => {};
 
   handleSubmit = event => {
     event.preventDefault();
-
+    const { onSubmit } = this.props;
     const email = this.email.value;
-    resetPassword(email, response => {
-      console.log(response);
-    });
+    const pass = this.pass.value;
+
+    if (email && pass) {
+      onSubmit({ email, pass });
+    }
   };
 
   render() {
@@ -21,15 +22,22 @@ class ResetForm extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="input-wrap">
               <input
-                onFocus={this.clearFields}
+                onFocus={() => (this.email.value = "")}
                 type="email"
                 ref={node => (this.email = node)}
                 placeholder="email"
                 defaultValue="user@app.com"
               />
             </div>
-
-            <button type="submit">reset</button>
+            <div className="input-wrap">
+              <input
+                onFocus={() => (this.pass.value = "")}
+                type="password"
+                ref={node => (this.pass = node)}
+                placeholder="password"
+              />
+            </div>
+            <button type="submit">login</button>
             {this.props.err ? (
               <div className="warning">
                 <WarningIcon /> <span className="msg">Login Failed</span>
@@ -37,9 +45,10 @@ class ResetForm extends Component {
             ) : null}
           </form>
         </div>
+        {this.props.render()}
       </div>
     );
   }
 }
 
-export default ResetForm;
+export default LoginForm;

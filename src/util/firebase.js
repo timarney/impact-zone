@@ -12,9 +12,6 @@ export function watchRef(id, cb) {
     "value",
     snapshot => {
       let items = snapshot.val();
-
-      //console.log("snapshot");
-
       if (!items) {
         console.log("no items");
         cb(new Error("failed to load items"), {});

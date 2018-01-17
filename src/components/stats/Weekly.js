@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { DateTime } from "luxon";
-import { removeRef } from "../util/firebase";
+import { removeRef } from "../../util/firebase";
 import classNames from "classnames";
 
 class Weekly extends Component {

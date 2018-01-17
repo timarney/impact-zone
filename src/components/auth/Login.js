@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Redirect,
-  Link
-} from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { Auth } from "./Auth";
 import LoginForm from "./LoginForm";
@@ -30,7 +27,7 @@ export class Login extends React.Component {
 
   render() {
     const { from } = this.props.location.state || {
-      from: { pathname: "/app" }
+      from: { pathname: "/stats" }
     };
 
     const { redirectToReferrer, err } = this.state;

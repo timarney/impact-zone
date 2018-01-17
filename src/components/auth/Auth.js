@@ -1,4 +1,4 @@
-import firebase from "../config-firebase.js";
+import firebase from "../../config-firebase.js";
 
 export const Auth = {
   isAuthenticated: false,

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Animated from "animated/lib/targets/react-dom";
 import sortbyorder from "lodash.sortbyorder";
-import { tempPeople } from "../util/skelton";
+import { tempPeople } from "../../util/skelton";
 import Person from "./Person";
 import classNames from "classnames";
-import { detailsBoxTransition, detailsBoxProps } from "../transition";
+import { detailsBoxTransition, detailsBoxProps } from "../../transition";
 
 class People extends Component {
   refs = {};

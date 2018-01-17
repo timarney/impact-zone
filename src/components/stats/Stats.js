@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import "./App.css";
-import OverallAttendance from "./components/OverallAttendance";
-import Weekly from "./components/Weekly";
-import People from "./components/People";
-import Header from "./components/Header";
+import "../../App.css";
+import OverallAttendance from "./OverallAttendance";
+import Weekly from "./Weekly";
+import People from "./People";
+import Header from "../Header";
 import Animated from "animated/lib/targets/react-dom";
-import { watchRef } from "./util/firebase";
-import { getAttendance } from "./util/attendance";
+import { watchRef } from "../../util/firebase";
+import { getAttendance } from "../../util/attendance";
 
-class App extends Component {
+export class Stats extends Component {
   state = {
     nextLocation: false,
     location: false,
@@ -19,7 +19,6 @@ class App extends Component {
   };
 
   fadeIn() {
-    console.log("fadeIn()");
     Animated.sequence([
       Animated.timing(this.state.val, { toValue: 1 })
     ]).start();
@@ -28,7 +27,6 @@ class App extends Component {
   fadeOut = id => {
     Animated.sequence([Animated.timing(this.state.val, { toValue: 0 })]).start(
       e => {
-        console.log("fadeOut()", id);
         this.updateLocation(id);
       }
     );
@@ -52,20 +50,14 @@ class App extends Component {
 
   updateStats = () => {
     const { location } = this.state;
-    console.log("update stats",location);
     this.fadeIn();
-
-
-    console.log("updateStats", location);
 
     watchRef(location, async (err, items) => {
       if (err) {
-        console.log("err", err);
         this.setState({ error: err.message });
         return;
       }
 
-      console.log(items);
       this.setState({ items, attendance: await getAttendance(items) });
     });
   };
@@ -136,5 +128,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

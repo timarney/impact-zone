@@ -30,6 +30,7 @@ h2 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  margin:10px;
 }
 
 /* PIE CHART */

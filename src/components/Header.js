@@ -23,9 +23,9 @@ class header extends Component {
 
   render() {
     const { location, initUpdateLocation } = this.props;
-    //const { disabled } = this.state;
+    const { disabled } = this.state;
 
-    const disabled = false;
+    //const disabled = false;
 
     const headerClass = classNames({
       disabled: disabled === true

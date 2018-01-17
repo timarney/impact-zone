@@ -1,55 +1,43 @@
 import React, { Component } from "react";
-import WarningIcon from "../icons/Warning";
+import WarningIcon from "../../icons/Warning";
 
-class LoginForm extends Component {
+class ResetForm extends Component {
   clearFields = () => {};
 
   handleSubmit = event => {
     event.preventDefault();
     const { onSubmit } = this.props;
-
     const email = this.email.value;
-    const pass = this.pass.value;
-
-    if (email && pass) {
-      onSubmit({ email, pass });
-    }
+    onSubmit(email);
   };
 
   render() {
+    const { err } = this.props;
     return (
       <div>
         <div className="login-form">
           <form onSubmit={this.handleSubmit}>
             <div className="input-wrap">
               <input
-                onFocus={this.clearFields}
+                onFocus={() => (this.email.value = "")}
                 type="email"
                 ref={node => (this.email = node)}
                 placeholder="email"
                 defaultValue="user@app.com"
               />
             </div>
-            <div className="input-wrap">
-              <input
-                onFocus={this.clearFields}
-                type="password"
-                ref={node => (this.pass = node)}
-                placeholder="password"
-              />
-            </div>
-            <button type="submit">login</button>
-            {this.props.err ? (
+
+            <button type="submit">reset</button>
+            {err ? (
               <div className="warning">
-                <WarningIcon /> <span className="msg">Login Failed</span>
+                <WarningIcon /> <span className="msg">Reset Failed</span>
               </div>
             ) : null}
           </form>
         </div>
-        {this.props.render()}
       </div>
     );
   }
 }
 
-export default LoginForm;
+export default ResetForm;

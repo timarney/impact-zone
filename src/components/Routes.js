@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
-import App from "../App";
-import Reset from "./Reset";
-import { Login } from "./Login";
-import { SignOut } from "./SignOut";
-import { Auth } from "./Auth";
+import { Stats } from "./stats/Stats";
+import { Login, Reset, SignOut, Auth } from "./auth";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -35,7 +28,7 @@ export const Routes = () => (
       <SignOut />
       <Route exact path="/" component={Login} />
       <Route exact path="/reset" component={Reset} />
-      <PrivateRoute path="/app" component={App} />
+      <PrivateRoute path="/stats" component={Stats} />
     </div>
   </Router>
 );
