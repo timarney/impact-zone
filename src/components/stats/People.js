@@ -101,7 +101,8 @@ class People extends Component {
           ✘
         </span>
       );
-
+      
+      // eslint-disable-next-line
       for (let [k, v] of Object.entries(obj)) {
         if (v.name === person.name) {
           if (v.in) {
