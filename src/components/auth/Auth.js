@@ -8,13 +8,12 @@ export const Auth = {
       .auth()
       .signInWithEmailAndPassword(user.email, user.pass)
       .then(response => {
-        console.log(response);
         self.isAuthenticated = true;
         cb(null);
       })
       .catch(function(error) {
         self.isAuthenticated = false;
-        console.log(error);
+        console.error(error.message);
         cb(error);
       });
   },

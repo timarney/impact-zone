@@ -77,10 +77,6 @@ export async function getAttendance(data) {
   attendance.overall.percent = Math.floor(
     attendance.overall.total / attendance.overall.entries
   );
-
-
-  console.log("coming back");
-
   return attendance;
 }
 

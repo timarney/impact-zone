@@ -1,12 +1,7 @@
 import firebase from "firebase";
 
-let db = "";
-let key = "";
-
-//if (process.env.NODE_ENV === "production") {
-  db = process.env.REACT_APP_IZ_DB;
-  key = process.env.REACT_APP_IZ_KEY;
-//}
+const db = process.env.REACT_APP_IZ_DB;
+const key = process.env.REACT_APP_IZ_KEY;
 
 const config = {
   firebase: `https://${db}.firebaseio.com/`,
