@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classNames from "classnames";
+import { SignOut } from "./auth";
 
 class header extends Component {
   state = {
@@ -44,7 +45,9 @@ class header extends Component {
 
     return (
       <div className="header">
-        <h1 className={headerClass}>Impact Zone</h1>
+        <div className="title">
+          <h1 className={headerClass}>Impact Zone</h1> <SignOut />
+        </div>
         <select
           className={selectClass}
           onChange={event => {
@@ -54,6 +57,7 @@ class header extends Component {
         >
           {this.state.options.map(createItem)}
         </select>
+
         <hr />
       </div>
     );

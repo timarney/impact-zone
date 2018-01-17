@@ -18,6 +18,12 @@ h2 {
   margin: 5px 20px;
 }
 
+
+.header .title{
+  display: flex;
+  justify-content: space-between;
+}
+
 .header h1 {
   font-size: 1.2em;
 }

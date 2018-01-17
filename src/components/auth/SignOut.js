@@ -7,6 +7,7 @@ export const SignOut = withRouter(
     Auth.isAuthenticated ? (
       <p className="sign-out">
         <button
+          className="btn"
           onClick={() => {
             Auth.signout(() => history.push("/"));
           }}

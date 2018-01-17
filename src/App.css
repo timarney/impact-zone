@@ -112,7 +112,7 @@
   padding-right: 20px;
 }
 
-.details-header{
+.details-header {
   display: flex;
   justify-content: space-between;
 }
@@ -121,4 +121,26 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 20px;
+}
+
+.btn {
+  background: #666666;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  font-size: 13px;
+  font-weight: 500;
+  justify-content: center;
+  outline: none;
+  padding: 10px 9px 10px 11px;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
+
+.btn:active {
+  transform: scale(0.99);
 }

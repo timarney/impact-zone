@@ -135,7 +135,7 @@ class People extends Component {
           <div className="close-details" />
           <div className="details-header">
             <h2>{person.name}</h2>
-            <button onClick={this.closeDetails}>CLOSE</button>
+            <button className="btn" onClick={this.closeDetails}>CLOSE</button>
           </div>
           {d.reverse()}
         </div>
