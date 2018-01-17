@@ -8,10 +8,11 @@ class Person extends Component {
       <div
         className="person"
         onClick={() => {
-          openDetails(this.el);
+          openDetails(this.el, this.person);
         }}
         ref={el => {
           this.el = el;
+          this.person = person;
         }}
       >
         <div className="title">

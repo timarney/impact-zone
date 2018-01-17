@@ -8,8 +8,6 @@ export const Auth = {
       .auth()
       .signInWithEmailAndPassword(user.email, user.pass)
       .then(response => {
-        console.log("lets go", response);
-        console.log(cb);
         self.isAuthenticated = true;
         cb(null);
       })

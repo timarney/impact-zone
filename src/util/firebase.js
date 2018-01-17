@@ -13,7 +13,6 @@ export function watchRef(id, cb) {
     snapshot => {
       let items = snapshot.val();
       if (!items) {
-        console.log("no items");
         cb(new Error("failed to load items"), {});
         return;
       }
@@ -28,7 +27,7 @@ export function watchRef(id, cb) {
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    console.log(user.email);
+    //
   } else {
     console.log("No user is signed in.");
     // No user is signed in.

@@ -4,13 +4,24 @@ import sortbyorder from "lodash.sortbyorder";
 import { tempPeople } from "../../util/skelton";
 import Person from "./Person";
 import classNames from "classnames";
+import { DateTime } from "luxon";
 import { detailsBoxTransition, detailsBoxProps } from "../../transition";
 
 class People extends Component {
   refs = {};
   state = {
-    animation: detailsBoxProps
+    animation: detailsBoxProps,
+    activePerson: null
   };
+
+  componentDidMount() {
+    // window.addEventListener("resize", () => {});
+  }
+
+  componentWillUnmount() {
+    // window.removeEventListener("resize", this.closeDetails());
+  }
+
   order() {
     const { attendance } = this.props;
 
@@ -57,17 +68,70 @@ class People extends Component {
     );
   }
 
-  openDetails = e => {
+  openDetails = (e, person) => {
     let { animation } = this.state;
     let y = this.el.getBoundingClientRect();
     let x = e.getBoundingClientRect();
     detailsBoxTransition(x, y, animation, "up");
+
+    this.setState({ activePerson: person });
   };
 
   closeDetails = () => {
     let { animation } = this.state;
     let x = animation.activeBox;
+
+    if (!x) return;
+
     detailsBoxTransition(null, x, animation);
+  };
+
+  personDetails = () => {
+    const { items } = this.props;
+    const person = this.state.activePerson;
+    if (!person) return null;
+
+    let d = [];
+
+    for (let item in items) {
+      let f = DateTime.fromISO(item).toFormat("ccc dd LLL yyyy");
+      let obj = items[item].people;
+      let attend = (
+        <span style={{ color: "rgb(254, 115, 123)", marginRight: "15px" }}>
+          ✘
+        </span>
+      );
+
+      for (let [k, v] of Object.entries(obj)) {
+        if (v.name === person.name) {
+          if (v.in) {
+            attend = (
+              <span
+                style={{ color: "rgb(102, 194, 121)", marginRight: "15px" }}
+              >
+                ✔
+              </span>
+            );
+          }
+        }
+      }
+
+      d.push(
+        <div className="week" key={item}>
+          <div>
+            {attend} {f}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <h2>{person.name} </h2>
+
+        {d}
+      </div>
+    );
   };
 
   render() {
@@ -80,6 +144,7 @@ class People extends Component {
     const animatedStyle = {
       width: animation.w,
       height: animation.h,
+      opacity: animation.o,
       transform: [
         {
           translateX: animation.x
@@ -106,7 +171,10 @@ class People extends Component {
           className="detailsBox"
           style={animatedStyle}
           onClick={this.closeDetails}
-        />
+        >
+          <div className="inner">{this.personDetails()}</div>
+        </Animated.div>
+
         <div
           className="people-list"
           ref={el => {
