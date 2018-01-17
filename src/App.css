@@ -91,14 +91,23 @@
 
 .detailsBox .inner {
   padding: 20px;
+  background-color: #2b2b2b;
 }
 
 .detailsBox .inner h2 {
   padding-top: 0;
   margin: 0;
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
+.detailsBox .inner .week {
+  color: #666666;
+  border-bottom: 2px solid #333;
+}
 
-.detailsBox .inner .week{
-  color:#666666;
+.sign-out {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
 }

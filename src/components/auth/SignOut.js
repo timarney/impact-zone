@@ -5,8 +5,7 @@ import { withRouter } from "react-router-dom";
 export const SignOut = withRouter(
   ({ history }) =>
     Auth.isAuthenticated ? (
-      <p>
-        Welcome!{" "}
+      <p className="sign-out">
         <button
           onClick={() => {
             Auth.signout(() => history.push("/"));

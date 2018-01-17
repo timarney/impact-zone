@@ -128,8 +128,7 @@ class People extends Component {
     return (
       <div>
         <h2>{person.name} </h2>
-
-        {d}
+        {d.reverse()}
       </div>
     );
   };
