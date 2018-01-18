@@ -6,10 +6,6 @@ export async function watchRef(id, cb) {
     return;
   }
 
-  let user = await isLoggedIn();
-
-  if (!user) return;
-
   const ref = firebase.database().ref(id);
 
   ref.on(
@@ -31,18 +27,6 @@ export async function watchRef(id, cb) {
       console.log(e.message);
     }
   );
-}
-
-export async function isLoggedIn() {
-  return new Promise(resolve => {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    });
-  });
 }
 
 export function login(cb, user) {
@@ -69,8 +53,6 @@ export function signout(cb) {
       cb(error);
     });
 }
-
-// this will handle password reset
 
 export function resetPassword(email, cb) {
   const auth = firebase.auth();

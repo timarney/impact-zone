@@ -1,10 +1,6 @@
-import { isLoggedIn, login, signout } from "../../util/firebase";
+import { login, signout } from "../../util/firebase";
 
 export const Auth = {
-  async checkAuth() {
-    let user = await isLoggedIn();
-    return user;
-  },
   authenticate(cb, user) {
     login(cb, user);
   },
