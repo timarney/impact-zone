@@ -9,6 +9,7 @@ import { getAttendance } from "../../util/attendance";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { DateTime } from "luxon";
+import { LocationDropDown } from "../LocationDropDown";
 
 export class Stats extends Component {
   state = {
@@ -41,7 +42,6 @@ export class Stats extends Component {
   initUpdateLocation = id => {
     const { history } = this.props;
     history.push(`/stats/${id}`);
-
     this.fadeOut(id);
     this.setState({ nextLocation: id });
   };
@@ -88,11 +88,30 @@ export class Stats extends Component {
         <Header
           attendance={attendance}
           locationId={locationId ? locationId : 0}
-          initUpdateLocation={this.initUpdateLocation}
-          navLink={() => {
-            history.push(`/attendance/${locationId}/${now}`);
+          onChange={this.initUpdateLocation}
+          render={({ locationId, disabled, onChange }) => {
+            return [
+              <LocationDropDown
+                key="1"
+                locationId={locationId}
+                disabled={disabled}
+                onChange={onChange}
+              />,
+              <button
+                key="2"
+                className="btn nav-link"
+                style={{
+                  display: "inline-block",
+                  marginLeft: 15
+                }}
+                onClick={() => {
+                  history.push(`/attendance/${locationId}/${now}`);
+                }}
+              >
+                Add New
+              </button>
+            ];
           }}
-          navText="Add New"
         />
         <div className="locations">
           <OverallAttendance

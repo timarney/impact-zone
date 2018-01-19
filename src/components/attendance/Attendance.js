@@ -63,20 +63,14 @@ export class Attendance extends Component {
   //
 
   render() {
-    const { history, locationId } = this.props;
+    const { locationId } = this.props;
 
     return (
       <div className="App">
         <Header
           attendance={false}
           locationId={locationId ? locationId : 0}
-          navLink={() => {
-            history.push(`/stats/${locationId}`);
-          }}
-          navText="View Stats"
-          initUpdateLocation={id => {
-            history.push(`/attendance/${id}`);
-          }}
+          render={() => null}
         />
         <div style={{ padding: "30px" }}>
           Attendance - {getLocationName(locationId)}

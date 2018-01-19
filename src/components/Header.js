@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import { SignOut } from "./auth";
-import { locations } from "../api/locations";
 
 class Header extends Component {
   state = {
-    options: locations,
     disabled: true
   };
 
@@ -24,7 +22,7 @@ class Header extends Component {
   }
 
   render() {
-    const { locationId, initUpdateLocation, navLink, navText } = this.props;
+    const { locationId, onChange, navLink, navText } = this.props;
     const { disabled } = this.state;
 
     //const disabled = false;
@@ -32,31 +30,13 @@ class Header extends Component {
       disabled: disabled === true
     });
 
-    const selectClass = classNames({
-      schools: true,
-      disabled: disabled === true
-    });
-
-    const createItem = (item, key) => (
-      <option key={key} value={item.value} disabled={disabled}>
-        {item.name}
-      </option>
-    );
-
     return (
       <div className="header">
         <div className="title">
           <h1 className={headerClass}>Impact Zone</h1> <SignOut />
         </div>
-        <select
-          className={selectClass}
-          onChange={event => {
-            initUpdateLocation(Number(event.target.value));
-          }}
-          value={locationId}
-        >
-          {this.state.options.map(createItem)}
-        </select>
+
+        {this.props.render({ locationId, disabled, onChange })}
 
         {navLink && locationId ? (
           <button
