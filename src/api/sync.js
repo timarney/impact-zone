@@ -1,7 +1,7 @@
 import { api_host, getLocation } from "./index";
 import firebase from "../config-firebase.js";
 import { DateTime } from "luxon";
-const now = DateTime.local().toISODate();
+export const now = DateTime.local().toISODate();
 
 function diffList(snap, res, ref) {
   for (let prop in res.people) {
@@ -46,7 +46,7 @@ export function syncPeople(locationId, date = now) {
       console.log("INDEX.JS No Firebase data exists:" + location);
       addRecord(locationId, await getPeople(locationId));
     } else {
-      console.log("DIFF List:" + location);
+      //console.log("DIFF List:" + location);
       diffList(snapshot.val(), await getPeople(locationId), ref);
     }
   });

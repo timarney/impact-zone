@@ -11,3 +11,13 @@ export function monitorAuth() {
     });
   };
 }
+
+export function attendanceList(locationId, date) {
+  return (dispatch, getState) => {
+    const ref = firebase.database().ref(locationId + "/" + date);
+
+    ref.on("value", snapshot => {
+      dispatch({ type: "ATTENDANCE", payload: snapshot.val() });
+    });
+  };
+}

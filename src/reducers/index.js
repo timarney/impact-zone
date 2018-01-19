@@ -9,10 +9,12 @@ const authReducer = (state = { isAuthenticated: false }, action) => {
   }
 };
 
-const mainReducer = (state = { loading: true }, action) => {
+const mainReducer = (state = { loading: true, attendance: [] }, action) => {
   switch (action.type) {
     case "AUTH":
       return { ...state, loading: false };
+    case "ATTENDANCE":
+      return { ...state, attendance: action.payload };
     default:
       return state;
   }

@@ -31,7 +31,7 @@ class People extends Component {
     for (let item in people) {
       let total = people[item].present + people[item].absent;
 
-      if (people[item].percent === 0) continue;
+      //if (people[item].percent === 0) continue;
 
       let streak;
       if (typeof people[item].streak.present !== "undefined") {
