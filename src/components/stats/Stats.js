@@ -93,7 +93,7 @@ export class Stats extends Component {
     const { items, attendance, error, nextLocation } = this.state;
     let present, absent;
 
-    const { locationId } = this.props;
+    const { locationId, history } = this.props;
 
     if (attendance && attendance.overall) {
       present = attendance.overall.percent;
@@ -110,6 +110,10 @@ export class Stats extends Component {
           attendance={attendance}
           locationId={locationId ? locationId : 0}
           initUpdateLocation={this.initUpdateLocation}
+          navLink={() => {
+            history.push(`/attendance/${locationId}`);
+          }}
+          navText="Attendance"
         />
         <div className="locations">
           <OverallAttendance

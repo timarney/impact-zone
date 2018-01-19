@@ -30,7 +30,7 @@ class Header extends Component {
   }
 
   render() {
-    const { locationId, initUpdateLocation, stats } = this.props;
+    const { locationId, initUpdateLocation, navLink, navText } = this.props;
     const { disabled } = this.state;
 
     //const disabled = false;
@@ -64,13 +64,13 @@ class Header extends Component {
           {this.state.options.map(createItem)}
         </select>
 
-        {stats && locationId ? (
+        {navLink && locationId ? (
           <button
             className="btn"
             style={{ display: "inline-block", marginLeft: 15 }}
-            onClick={stats}
+            onClick={navLink}
           >
-            Stats
+            {navText}
           </button>
         ) : null}
 

@@ -13,9 +13,10 @@ export class Attendance extends Component {
         <Header
           attendance={true}
           locationId={locationId ? locationId : 0}
-          stats={() => {
+          navLink={() => {
             history.push(`/stats/${locationId}`);
           }}
+          navText="Stats"
           initUpdateLocation={id => {
             history.push(`/attendance/${id}`);
           }}
