@@ -3,8 +3,20 @@ import Header from "../Header";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
+// TODO add this back in
+//import { syncPeople } from "../../api/sync";
+
 export class Attendance extends Component {
   state = {};
+
+  componentDidMount() {
+    // TODO - don't do this for archived records
+    /*
+    const { locationId, date } = this.props;
+    syncPeople(locationId);
+    */
+  }
+
   render() {
     const { history, locationId } = this.props;
 
@@ -16,7 +28,7 @@ export class Attendance extends Component {
           navLink={() => {
             history.push(`/stats/${locationId}`);
           }}
-          navText="Stats"
+          navText="View Stats"
           initUpdateLocation={id => {
             history.push(`/attendance/${id}`);
           }}
@@ -29,7 +41,8 @@ export class Attendance extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    locationId: ownProps.match.params.id
+    locationId: ownProps.match.params.id,
+    date: ownProps.match.params.date
   };
 };
 

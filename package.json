@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "animated": "^0.2.1",
+    "axios": "^0.17.1",
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.2",
     "firebase": "^4.8.2",
+    "jsonwebtoken": "^8.1.0",
     "lodash.sortbyorder": "^3.4.4",
     "luxon": "^0.3.1",
     "prop-types": "^15.6.0",

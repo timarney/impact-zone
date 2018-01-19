@@ -144,3 +144,15 @@
 .btn:active {
   transform: scale(0.99);
 }
+
+.error404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.nav-link {
+  padding: 5px 9px 5px 11px;
+  background-color: rgb(102, 194, 121);
+}

@@ -6,18 +6,18 @@ import Header from "../Header";
 import Animated from "animated/lib/targets/react-dom";
 import { watchRef } from "../../util/firebase";
 import { getAttendance } from "../../util/attendance";
-
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { DateTime } from "luxon";
 
 export class Stats extends Component {
   state = {
     nextLocation: false,
-    //location: false,
     items: [],
     attendance: false,
     error: "",
-    val: new Animated.Value(0)
+    val: new Animated.Value(0),
+    now: DateTime.local().toISODate()
   };
 
   fadeIn() {
@@ -47,18 +47,10 @@ export class Stats extends Component {
   };
 
   updateLocation = id => {
-    /*
-    this.setState(
-      { location: id, items: [], attendance: false },
-      this.updateStats
-    );
-    */
-
     this.setState({ items: [], attendance: false }, this.updateStats);
   };
 
   updateStats = () => {
-    //const { location } = this.state;
     const { locationId } = this.props;
     this.fadeIn();
 
@@ -72,28 +64,15 @@ export class Stats extends Component {
     });
   };
 
-  defaultLocation() {
-    this.setState({ nextLocation: 25, location: 25 }, this.updateStats);
-  }
-
   componentDidMount() {
-    //const { location } = this.state;
-    const { locationId } = this.props;
     this.updateStats();
-
-    if (!locationId) {
-      this.defaultLocation();
-    }
-
     this.fadeIn();
   }
 
   render() {
-    //const { items, attendance, error, location, nextLocation } = this.state;
-    const { items, attendance, error, nextLocation } = this.state;
-    let present, absent;
-
+    const { items, attendance, error, nextLocation, now } = this.state;
     const { locationId, history } = this.props;
+    let present, absent;
 
     if (attendance && attendance.overall) {
       present = attendance.overall.percent;
@@ -111,9 +90,9 @@ export class Stats extends Component {
           locationId={locationId ? locationId : 0}
           initUpdateLocation={this.initUpdateLocation}
           navLink={() => {
-            history.push(`/attendance/${locationId}`);
+            history.push(`/attendance/${locationId}/${now}`);
           }}
-          navText="Attendance"
+          navText="Add New"
         />
         <div className="locations">
           <OverallAttendance

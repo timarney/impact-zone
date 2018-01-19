@@ -66,8 +66,11 @@ class Header extends Component {
 
         {navLink && locationId ? (
           <button
-            className="btn"
-            style={{ display: "inline-block", marginLeft: 15 }}
+            className="btn nav-link"
+            style={{
+              display: "inline-block",
+              marginLeft: 15
+            }}
             onClick={navLink}
           >
             {navText}
