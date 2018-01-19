@@ -11,7 +11,7 @@ class PrivateRoute extends React.Component {
   render() {
     const { component: Component, ...rest } = this.props;
     if (this.props.loading) {
-      return <div>LOADING</div>;
+      return <div>LOADING !!</div>;
     } else {
       return (
         <Route

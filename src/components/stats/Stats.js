@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../../App.css";
 import OverallAttendance from "./OverallAttendance";
 import Weekly from "./Weekly";
 import People from "./People";

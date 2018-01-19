@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
+import "./App.css";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -14,14 +15,9 @@ const composeEnhancers =
       })
     : compose;
 
-const enhancer = composeEnhancers(
-  applyMiddleware(thunk)
-  // other store enhancers if any
-);
+const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 const store = createStore(rootReducer, enhancer);
-
-//store.dispatch(errorAfterFiveSeconds());
 
 ReactDOM.render(<Root store={store} />, document.getElementById("root"));
 registerServiceWorker();

@@ -15,6 +15,13 @@ class header extends Component {
     disabled: true
   };
 
+  componentDidMount() {
+    const { attendance } = this.props;
+    if (attendance) {
+      this.setState({ disabled: false });
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     const { attendance } = nextProps;
     if (attendance) {
