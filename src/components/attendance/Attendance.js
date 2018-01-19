@@ -6,26 +6,29 @@ import { withRouter } from "react-router-dom";
 export class Attendance extends Component {
   state = {};
   render() {
-    const { history, location } = this.props;
+    const { history, locationId } = this.props;
+
     return (
       <div className="App">
         <Header
           attendance={true}
-          location={location}
+          locationId={locationId ? locationId : 0}
+          stats={() => {
+            history.push(`/stats/${locationId}`);
+          }}
           initUpdateLocation={id => {
             history.push(`/attendance/${id}`);
           }}
         />
-        <div>Attendance</div>
+        <div style={{ padding: "30px" }}>Attendance</div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
   return {
-    location: ownProps.match.params.id
+    locationId: ownProps.match.params.id
   };
 };
 

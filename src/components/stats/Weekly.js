@@ -15,9 +15,9 @@ class Weekly extends Component {
 
   deleteItem = e => {
     e.preventDefault();
-    const { location } = this.props;
+    const { locationId } = this.props;
     const id = e.target.id;
-    removeRef(`${location}/${id}`);
+    removeRef(`${locationId}/${id}`);
   };
 
   renderOutline() {

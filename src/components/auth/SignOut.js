@@ -3,7 +3,7 @@ import { Auth } from "./Auth";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-const LogOut = ({ history, isAuthenticated }) => {
+const Menu = ({ history, isAuthenticated }) => {
   return isAuthenticated ? (
     <p className="sign-out">
       <button
@@ -24,4 +24,4 @@ const mapStateToProps = state => {
   };
 };
 
-export const SignOut = withRouter(connect(mapStateToProps)(LogOut));
+export const SignOut = withRouter(connect(mapStateToProps)(Menu));

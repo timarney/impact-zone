@@ -59,10 +59,10 @@ export class Stats extends Component {
 
   updateStats = () => {
     //const { location } = this.state;
-    const { location } = this.props;
+    const { locationId } = this.props;
     this.fadeIn();
 
-    watchRef(location, async (err, items) => {
+    watchRef(locationId, async (err, items) => {
       if (err) {
         this.setState({ error: err.message });
         return;
@@ -78,10 +78,10 @@ export class Stats extends Component {
 
   componentDidMount() {
     //const { location } = this.state;
-    const { location } = this.props;
+    const { locationId } = this.props;
     this.updateStats();
 
-    if (!location) {
+    if (!locationId) {
       this.defaultLocation();
     }
 
@@ -93,7 +93,7 @@ export class Stats extends Component {
     const { items, attendance, error, nextLocation } = this.state;
     let present, absent;
 
-    const { location } = this.props;
+    const { locationId } = this.props;
 
     if (attendance && attendance.overall) {
       present = attendance.overall.percent;
@@ -108,12 +108,11 @@ export class Stats extends Component {
       <div className="App">
         <Header
           attendance={attendance}
-          location={location}
+          locationId={locationId ? locationId : 0}
           initUpdateLocation={this.initUpdateLocation}
         />
         <div className="locations">
           <OverallAttendance
-            location={location}
             attendance={attendance}
             present={present}
             absent={absent}
@@ -124,7 +123,7 @@ export class Stats extends Component {
             style={{ opacity: this.state.val }}
           >
             <Weekly
-              location={location}
+              locationId={locationId}
               nextLocation={nextLocation}
               items={items}
               attendance={attendance}
@@ -135,7 +134,7 @@ export class Stats extends Component {
 
         <div className="people">
           <Animated.div style={{ opacity: this.state.val }}>
-            <People attendance={attendance} items={items} location={location} />
+            <People attendance={attendance} items={items} />
           </Animated.div>
         </div>
       </div>
@@ -145,7 +144,7 @@ export class Stats extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    location: ownProps.match.params.id
+    locationId: ownProps.match.params.id
   };
 };
 

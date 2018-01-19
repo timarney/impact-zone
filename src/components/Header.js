@@ -30,11 +30,10 @@ class Header extends Component {
   }
 
   render() {
-    const { location, initUpdateLocation } = this.props;
+    const { locationId, initUpdateLocation, stats } = this.props;
     const { disabled } = this.state;
 
     //const disabled = false;
-
     const headerClass = classNames({
       disabled: disabled === true
     });
@@ -60,10 +59,20 @@ class Header extends Component {
           onChange={event => {
             initUpdateLocation(Number(event.target.value));
           }}
-          value={location}
+          value={locationId}
         >
           {this.state.options.map(createItem)}
         </select>
+
+        {stats && locationId ? (
+          <button
+            className="btn"
+            style={{ display: "inline-block", marginLeft: 15 }}
+            onClick={stats}
+          >
+            Stats
+          </button>
+        ) : null}
 
         <hr />
       </div>
