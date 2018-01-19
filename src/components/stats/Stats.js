@@ -7,10 +7,13 @@ import Animated from "animated/lib/targets/react-dom";
 import { watchRef } from "../../util/firebase";
 import { getAttendance } from "../../util/attendance";
 
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 export class Stats extends Component {
   state = {
     nextLocation: false,
-    location: false,
+    //location: false,
     items: [],
     attendance: false,
     error: "",
@@ -36,19 +39,27 @@ export class Stats extends Component {
   }
 
   initUpdateLocation = id => {
+    const { history } = this.props;
+    history.push(`/stats/${id}`);
+
     this.fadeOut(id);
     this.setState({ nextLocation: id });
   };
 
   updateLocation = id => {
+    /*
     this.setState(
       { location: id, items: [], attendance: false },
       this.updateStats
     );
+    */
+
+    this.setState({ items: [], attendance: false }, this.updateStats);
   };
 
   updateStats = () => {
-    const { location } = this.state;
+    //const { location } = this.state;
+    const { location } = this.props;
     this.fadeIn();
 
     watchRef(location, async (err, items) => {
@@ -66,7 +77,8 @@ export class Stats extends Component {
   }
 
   componentDidMount() {
-    const { location } = this.state;
+    //const { location } = this.state;
+    const { location } = this.props;
     this.updateStats();
 
     if (!location) {
@@ -77,8 +89,11 @@ export class Stats extends Component {
   }
 
   render() {
-    const { items, attendance, error, location, nextLocation } = this.state;
+    //const { items, attendance, error, location, nextLocation } = this.state;
+    const { items, attendance, error, nextLocation } = this.state;
     let present, absent;
+
+    const { location } = this.props;
 
     if (attendance && attendance.overall) {
       present = attendance.overall.percent;
@@ -127,3 +142,11 @@ export class Stats extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    location: ownProps.match.params.id
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Stats));

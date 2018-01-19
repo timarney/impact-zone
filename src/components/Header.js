@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import { SignOut } from "./auth";
 
-class header extends Component {
+class Header extends Component {
   state = {
     options: [
       { name: "Select Location", value: 0 },
@@ -71,4 +71,4 @@ class header extends Component {
   }
 }
 
-export default header;
+export default Header;
