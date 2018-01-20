@@ -5,6 +5,9 @@ import { withRouter } from "react-router-dom";
 import { attendanceList } from "../../actions";
 import { syncPeople, now } from "../../api/sync";
 import { getLocationName } from "../../util";
+import CheckIn from "./Checkin";
+import Settings from "./Settings";
+import { DateTime } from "luxon";
 import sortBy from "sort-by";
 
 export class Attendance extends Component {
@@ -22,6 +25,7 @@ export class Attendance extends Component {
   }
 
   getListItems() {
+    const { locationId, date } = this.props;
     let accounts = this.props.attendance;
     if (!accounts || typeof accounts.people !== "object") {
       return null;
@@ -53,9 +57,13 @@ export class Attendance extends Component {
       })
       .sort(sortBy("name"))
       .map((item, index) => {
-        let txt = item.name;
-
-        return <div key={item.id}>{txt}</div>;
+        return (
+          <div className="person attendance-person" key={item.id}>
+            <CheckIn item={item} locationId={locationId} date={date} />
+            <div className="name">{item.name}</div>
+            <Settings />
+          </div>
+        );
       }); //end map
 
     return Items;
@@ -63,16 +71,19 @@ export class Attendance extends Component {
   //
 
   render() {
-    const { locationId } = this.props;
+    const { locationId, date } = this.props;
 
     return (
       <div className="App">
         <Header />
-        <div style={{ padding: "30px" }}>
-          Attendance - {getLocationName(locationId)}
-        </div>
 
-        {this.getListItems()}
+        <div className="people">
+          <h2>
+            Attendance - {getLocationName(locationId)} -{" "}
+            {DateTime.fromISO(date).toFormat("LLL dd yyyy")}
+          </h2>
+          <div className="people-list">{this.getListItems()}</div>
+        </div>
       </div>
     );
   }

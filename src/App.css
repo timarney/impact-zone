@@ -106,12 +106,6 @@
   border-bottom: 2px solid #333;
 }
 
-.sign-out {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
-}
-
 .details-header {
   display: flex;
   justify-content: space-between;
@@ -129,9 +123,10 @@
   border-radius: 3px;
   color: white;
   display: flex;
+  align-items:center;
+  justify-content: center;
   font-size: 13px;
   font-weight: 500;
-  justify-content: center;
   outline: none;
   padding: 10px 9px 10px 11px;
   text-transform: uppercase;

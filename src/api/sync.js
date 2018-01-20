@@ -19,6 +19,7 @@ function diffList(snap, res, ref) {
 function addRecord(locationId, data) {
   const date = now;
   const ref = firebase.database().ref();
+
   ref
     .child(locationId)
     .child(date)

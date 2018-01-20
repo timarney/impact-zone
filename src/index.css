@@ -242,3 +242,38 @@ h2 {
 .main-nav {
   display: flex;
 }
+
+.check {
+  margin-right: 20px;
+  filter: grayscale(100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.check:hover {
+  filter: grayscale(70%);
+  transform: scale(1.05);
+}
+
+.gear{
+  transition: all 0.2s ease-in-out;
+}
+
+.gear:hover {
+  transform: scale(1.05);
+}
+
+.check:active {
+  transform: scale(1.5);
+}
+
+.check.checked {
+  filter: none;
+}
+
+.attendance-person {
+  display: flex;
+}
+
+.attendance-person .name {
+  margin-top: 10px;
+}

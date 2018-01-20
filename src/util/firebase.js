@@ -77,3 +77,9 @@ export function removeRef(id) {
     });
   }
 }
+
+export function checkIn(locationId, date, id, val) {
+  const ref = firebase.database().ref(`${locationId}/${date}`);
+  let idRef = ref.child("people").child(id);
+  idRef.child("in").set(val);
+}
