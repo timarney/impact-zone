@@ -1,4 +1,4 @@
 export { Reset } from "./Reset";
 export { Login } from "./Login";
-export { SignOut } from "./SignOut";
+export { Nav } from "./Nav";
 export { Auth } from "./Auth";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import classNames from "classnames";
-import { SignOut } from "./auth";
+import { Nav } from "./auth";
 
 class Header extends Component {
   state = {
@@ -35,7 +35,7 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="title">
-          <h1 className={headerClass}>Impact Zone</h1> <SignOut />
+          <h1 className={headerClass}>Impact Zone</h1> <Nav />
         </div>
         {this.props.render({ disabled })}
         <hr />

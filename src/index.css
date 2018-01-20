@@ -70,12 +70,12 @@ h2 {
   border-bottom: 2px solid #ccc;
 }
 
-.week a{
+.week a {
   text-decoration: none;
-  color:#858989;
+  color: #858989;
 }
 
-.week a:hover{
+.week a:hover {
   text-decoration: underline;
 }
 
@@ -131,7 +131,7 @@ h2 {
 }
 
 .person:hover {
-  background-color: rgba(61, 61, 61,0.5);
+  background-color: rgba(61, 61, 61, 0.5);
 }
 
 .person .title {
@@ -237,4 +237,8 @@ h2 {
   top: 0;
   z-index: 1;
   background-color: #2b2b2b;
+}
+
+.main-nav {
+  display: flex;
 }

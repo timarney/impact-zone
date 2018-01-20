@@ -23,6 +23,7 @@ const Locations = (locationId, onChange) => {
 };
 
 export class Stats extends Component {
+  active = true;
   state = {
     nextLocation: false,
     items: [],
@@ -60,6 +61,7 @@ export class Stats extends Component {
   addNew = () => {
     const { history, locationId } = this.props;
     const { now } = this.state;
+    this.active = false;
     history.push(`/attendance/${locationId}/${now}`);
   };
 
@@ -72,6 +74,8 @@ export class Stats extends Component {
     this.fadeIn();
 
     watchRef(locationId, async (err, items) => {
+      if (!this.active) return;
+      //need to handle for sign-out
       if (err) {
         this.setState({ error: err.message });
         return;
@@ -151,6 +155,7 @@ export class Stats extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    isAuthenticated: state.auth.isAuthenticated,
     locationId: ownProps.match.params.id
   };
 };
