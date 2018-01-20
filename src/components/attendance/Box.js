@@ -27,19 +27,16 @@ class Box extends Component {
                 <Tooltip popperProps={popperProps}>
                   <div className="menu">
                     <div>
-                      <a href="#">Menu Item 1</a>
+                      <a href="#late">Arrived Late</a>
                     </div>
                     <div>
-                      <a href="#">Menu Item 2</a>
+                      <a href="#leftearly">Left Early</a>
                     </div>
                     <div>
-                      <a href="#">Menu Item 3</a>
+                      <a href="#walkedhome">Walked Home</a>
                     </div>
                     <div>
-                      <a href="#">Menu Item 4</a>
-                    </div>
-                    <div>
-                      <a href="#">Menu Item 5</a>
+                      <a href="#signout">Sign Out</a>
                     </div>
                   </div>
                 </Tooltip>
