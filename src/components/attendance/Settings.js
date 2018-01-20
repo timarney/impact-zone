@@ -5,7 +5,7 @@ import classNames from "classnames";
 class Settings extends Component {
   state = {};
   render() {
-    const { item } = this.props;
+    const { item, onClick } = this.props;
     const checkedClass = classNames({
       gear: true
     });
@@ -15,7 +15,7 @@ class Settings extends Component {
         className={checkedClass}
         onClick={e => {
           e.preventDefault();
-          console.log("gear", item);
+          onClick(item.id);
         }}
       >
         <GearIcon />

@@ -5,13 +5,12 @@ import { withRouter } from "react-router-dom";
 import { attendanceList } from "../../actions";
 import { syncPeople, now } from "../../api/sync";
 import { getLocationName } from "../../util";
-import CheckIn from "./Checkin";
-import Settings from "./Settings";
+import Box from "./Box";
 import { DateTime } from "luxon";
 import sortBy from "sort-by";
 
 export class Attendance extends Component {
-  state = {};
+  state = { tooltip: false };
 
   componentDidMount() {
     const { locationId, date, attendanceList } = this.props;
@@ -24,8 +23,18 @@ export class Attendance extends Component {
     attendanceList(locationId, date);
   }
 
+  handleClick = id => {
+    const { tooltip } = this.state;
+    if (tooltip === id) {
+      this.setState({ tooltip: false });
+      return;
+    }
+    this.setState({ tooltip: id });
+  };
+
   getListItems() {
     const { locationId, date } = this.props;
+    const { tooltip } = this.state;
     let accounts = this.props.attendance;
     if (!accounts || typeof accounts.people !== "object") {
       return null;
@@ -58,11 +67,14 @@ export class Attendance extends Component {
       .sort(sortBy("name"))
       .map((item, index) => {
         return (
-          <div className="person attendance-person" key={item.id}>
-            <CheckIn item={item} locationId={locationId} date={date} />
-            <div className="name">{item.name}</div>
-            <Settings />
-          </div>
+          <Box
+            active={tooltip}
+            onClick={this.handleClick}
+            key={item.id}
+            item={item}
+            locationId={locationId}
+            date={date}
+          />
         );
       }); //end map
 
