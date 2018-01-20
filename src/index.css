@@ -130,7 +130,7 @@ h2 {
   transition: all;
 }
 
-.person:hover {
+.person:hover, .person.active {
   background-color: rgba(61, 61, 61, 0.5);
 }
 

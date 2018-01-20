@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../Header";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { attendanceList } from "../../actions";
 import { syncPeople, now } from "../../api/sync";
@@ -10,8 +11,6 @@ import { DateTime } from "luxon";
 import sortBy from "sort-by";
 
 export class Attendance extends Component {
-  state = { tooltip: false };
-
   componentDidMount() {
     const { locationId, date, attendanceList } = this.props;
     if (date === now) {
@@ -24,17 +23,16 @@ export class Attendance extends Component {
   }
 
   handleClick = id => {
-    const { tooltip } = this.state;
-    if (tooltip === id) {
-      this.setState({ tooltip: false });
+    const { dispatch, activeItem } = this.props;
+    if (activeItem === id) {
+      dispatch({ type: "ACTIVE_ITEM", payload: false });
       return;
     }
-    this.setState({ tooltip: id });
+    dispatch({ type: "ACTIVE_ITEM", payload: id });
   };
 
   getListItems() {
-    const { locationId, date } = this.props;
-    const { tooltip } = this.state;
+    const { locationId, date, activeItem } = this.props;
     let accounts = this.props.attendance;
     if (!accounts || typeof accounts.people !== "object") {
       return null;
@@ -68,7 +66,7 @@ export class Attendance extends Component {
       .map((item, index) => {
         return (
           <Box
-            active={tooltip}
+            active={activeItem}
             onClick={this.handleClick}
             key={item.id}
             item={item}
@@ -105,10 +103,15 @@ const mapStateToProps = (state, ownProps) => {
   return {
     locationId: ownProps.match.params.id,
     date: ownProps.match.params.date,
-    attendance: state.main.attendance
+    attendance: state.main.attendance,
+    activeItem: state.main.activeItem
   };
 };
 
+function mapDispatchToProps(dispatch) {
+  return { ...bindActionCreators({ attendanceList }, dispatch), dispatch };
+}
+
 export default withRouter(
-  connect(mapStateToProps, { attendanceList })(Attendance)
+  connect(mapStateToProps, mapDispatchToProps)(Attendance)
 );

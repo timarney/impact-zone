@@ -3,6 +3,7 @@ import CheckIn from "./Checkin";
 import Settings from "./Settings";
 import { Manager, Target, Popper } from "react-popper";
 import { Tooltip } from "./Tooltip";
+import classNames from "classnames";
 import Aux from "react-aux";
 
 class Box extends Component {
@@ -10,9 +11,15 @@ class Box extends Component {
   render() {
     const { item, locationId, date, active, onClick } = this.props;
     const placement = "left";
+
+    const boxClass = classNames({
+      person: true,
+      "attendance-person": true,
+      active: active === item.id
+    });
     return (
       <Manager key={item.id}>
-        <div className="person attendance-person">
+        <div className={boxClass}>
           <CheckIn item={item} locationId={locationId} date={date} />
           <div className="name">{item.name}</div>
           <Target>

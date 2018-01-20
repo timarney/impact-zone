@@ -9,10 +9,15 @@ const authReducer = (state = { isAuthenticated: false }, action) => {
   }
 };
 
-const mainReducer = (state = { loading: true, attendance: [] }, action) => {
+const attendanceReducer = (
+  state = { loading: true, attendance: [], activeItem: false },
+  action
+) => {
   switch (action.type) {
     case "AUTH":
       return { ...state, loading: false };
+    case "ACTIVE_ITEM":
+      return { ...state, activeItem: action.payload };
     case "ATTENDANCE":
       return { ...state, attendance: action.payload };
     default:
@@ -22,5 +27,5 @@ const mainReducer = (state = { loading: true, attendance: [] }, action) => {
 
 export const rootReducer = combineReducers({
   auth: authReducer,
-  main: mainReducer
+  main: attendanceReducer
 });
