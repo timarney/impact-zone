@@ -1,15 +1,26 @@
 import React, { Component } from "react";
-import OverallAttendance from "./OverallAttendance";
-import Weekly from "./Weekly";
-import People from "./People";
-import Header from "../Header";
 import Animated from "animated/lib/targets/react-dom";
-import { watchRef } from "../../util/firebase";
-import { getAttendance } from "../../util/attendance";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import Aux from "react-aux";
 import { DateTime } from "luxon";
+import { watchRef } from "../../util/firebase";
+import { getAttendance } from "../../util/attendance";
+import { OverallAttendance, Weekly, People } from "./index";
+import Header from "../Header";
 import { LocationDropDown } from "../LocationDropDown";
+
+const Locations = (locationId, onChange) => {
+  return function(disabled) {
+    return (
+      <LocationDropDown
+        disabled={disabled}
+        locationId={locationId}
+        onChange={onChange}
+      />
+    );
+  };
+};
 
 export class Stats extends Component {
   state = {
@@ -46,6 +57,12 @@ export class Stats extends Component {
     this.setState({ nextLocation: id });
   };
 
+  addNew = () => {
+    const { history, locationId } = this.props;
+    const { now } = this.state;
+    history.push(`/attendance/${locationId}/${now}`);
+  };
+
   updateLocation = id => {
     this.setState({ items: [], attendance: false }, this.updateStats);
   };
@@ -70,8 +87,8 @@ export class Stats extends Component {
   }
 
   render() {
-    const { items, attendance, error, nextLocation, now } = this.state;
-    const { locationId, history } = this.props;
+    const { items, attendance, error, nextLocation } = this.state;
+    const { locationId } = this.props;
     let present, absent;
 
     if (attendance && attendance.overall) {
@@ -83,34 +100,22 @@ export class Stats extends Component {
       return <div>{error}</div>;
     }
 
+    // curry this to avoid passing the props down
+    const DropDownMenu = Locations(locationId, this.initUpdateLocation);
+
     return (
       <div className="App">
         <Header
-          attendance={attendance}
-          locationId={locationId ? locationId : 0}
-          onChange={this.initUpdateLocation}
-          render={({ locationId, disabled, onChange }) => {
-            return [
-              <LocationDropDown
-                key="1"
-                locationId={locationId}
-                disabled={disabled}
-                onChange={onChange}
-              />,
-              <button
-                key="2"
-                className="btn nav-link"
-                style={{
-                  display: "inline-block",
-                  marginLeft: 15
-                }}
-                onClick={() => {
-                  history.push(`/attendance/${locationId}/${now}`);
-                }}
-              >
-                Add New
-              </button>
-            ];
+          waitFor={attendance}
+          render={({ disabled }) => {
+            return (
+              <Aux>
+                {DropDownMenu(disabled)}
+                <button className="btn nav-link" onClick={this.addNew}>
+                  Add New
+                </button>
+              </Aux>
+            );
           }}
         />
         <div className="locations">

@@ -8,24 +8,26 @@ class Header extends Component {
   };
 
   componentDidMount() {
-    const { attendance } = this.props;
-    if (attendance) {
+    const { waitFor } = this.props;
+    if (waitFor === undefined || waitFor) {
       this.setState({ disabled: false });
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { attendance } = nextProps;
-    if (attendance) {
+    const { waitFor } = nextProps;
+    if (!waitFor && typeof waitFor !== "undefined") {
+      this.setState({ disabled: true });
+      return;
+    }
+
+    if (waitFor) {
       this.setState({ disabled: false });
     }
   }
 
   render() {
-    const { locationId, onChange, navLink, navText } = this.props;
     const { disabled } = this.state;
-
-    //const disabled = false;
     const headerClass = classNames({
       disabled: disabled === true
     });
@@ -35,26 +37,16 @@ class Header extends Component {
         <div className="title">
           <h1 className={headerClass}>Impact Zone</h1> <SignOut />
         </div>
-
-        {this.props.render({ locationId, disabled, onChange })}
-
-        {navLink && locationId ? (
-          <button
-            className="btn nav-link"
-            style={{
-              display: "inline-block",
-              marginLeft: 15
-            }}
-            onClick={navLink}
-          >
-            {navText}
-          </button>
-        ) : null}
-
+        {this.props.render({ disabled })}
         <hr />
       </div>
     );
   }
 }
+
+Header.defaultProps = {
+  render: () => null,
+  waitFor: undefined
+};
 
 export default Header;

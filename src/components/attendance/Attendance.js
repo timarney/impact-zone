@@ -67,11 +67,7 @@ export class Attendance extends Component {
 
     return (
       <div className="App">
-        <Header
-          attendance={false}
-          locationId={locationId ? locationId : 0}
-          render={() => null}
-        />
+        <Header />
         <div style={{ padding: "30px" }}>
           Attendance - {getLocationName(locationId)}
         </div>
