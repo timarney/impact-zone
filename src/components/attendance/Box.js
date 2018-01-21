@@ -1,25 +1,36 @@
 import React, { Component } from "react";
 import CheckIn from "./Checkin";
 import Settings from "./Settings";
+import { connect } from "react-redux";
 import { Manager, Target, Popper } from "react-popper";
 import { Tooltip } from "./Tooltip";
 import classNames from "classnames";
 import Aux from "react-aux";
+import OptionMenu from "./OptionMenu";
 
 class Box extends Component {
   state = {};
   render() {
-    const { item, locationId, date, active, onClick } = this.props;
+    const { item, locationId, date, active, onClick, disabled } = this.props;
     const placement = "left";
+
+    const isActiveItem = active === item.id;
 
     const boxClass = classNames({
       person: true,
       "attendance-person": true,
-      active: active === item.id
+      active: isActiveItem
     });
+
+    let disableItem = false;
+
+    if (disabled && !isActiveItem) {
+      disableItem = true;
+    }
+
     return (
       <Manager key={item.id}>
-        <div disabled className={boxClass}>
+        <div disabled={disableItem} className={boxClass}>
           <CheckIn item={item} locationId={locationId} date={date} />
           <div className="name">{item.name}</div>
           <Target>
@@ -32,20 +43,7 @@ class Box extends Component {
             <Popper placement={placement}>
               {({ popperProps = false }) => (
                 <Tooltip popperProps={popperProps}>
-                  <div className="menu">
-                    <div>
-                      <a href="#late">Arrived Late</a>
-                    </div>
-                    <div>
-                      <a href="#leftearly">Left Early</a>
-                    </div>
-                    <div>
-                      <a href="#walkedhome">Walked Home</a>
-                    </div>
-                    <div>
-                      <a href="#signout">Sign Out</a>
-                    </div>
-                  </div>
+                  <OptionMenu />
                 </Tooltip>
               )}
             </Popper>
@@ -58,4 +56,10 @@ class Box extends Component {
   }
 }
 
-export default Box;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    disabled: state.main.disabled
+  };
+};
+
+export default connect(mapStateToProps)(Box);

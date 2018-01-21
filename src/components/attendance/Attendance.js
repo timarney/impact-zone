@@ -103,7 +103,8 @@ const mapStateToProps = (state, ownProps) => {
     locationId: ownProps.match.params.id,
     date: ownProps.match.params.date,
     attendance: state.main.attendance,
-    activeItem: state.main.activeItem
+    activeItem: state.main.activeItem,
+    disabled: state.main.disabled
   };
 };
 

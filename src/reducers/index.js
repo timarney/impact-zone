@@ -9,6 +9,14 @@ const authReducer = (state = { isAuthenticated: false }, action) => {
   }
 };
 
+const setDisabled = id => {
+  if (id) {
+    return true;
+  }
+
+  return false;
+};
+
 const attendanceReducer = (
   state = { loading: true, attendance: [], activeItem: false },
   action
@@ -17,7 +25,11 @@ const attendanceReducer = (
     case "AUTH":
       return { ...state, loading: false };
     case "ACTIVE_ITEM":
-      return { ...state, activeItem: action.payload };
+      return {
+        ...state,
+        activeItem: action.payload,
+        disabled: setDisabled(action.payload)
+      };
     case "ATTENDANCE":
       return { ...state, attendance: action.payload };
     default:
