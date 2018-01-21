@@ -19,7 +19,7 @@ class Box extends Component {
     });
     return (
       <Manager key={item.id}>
-        <div className={boxClass}>
+        <div disabled className={boxClass}>
           <CheckIn item={item} locationId={locationId} date={date} />
           <div className="name">{item.name}</div>
           <Target>

@@ -13,7 +13,8 @@ class CheckIn extends Component {
     });
     return (
       <a
-        href="#checkin"
+      disabled  
+      href="#checkin"
         className={checkedClass}
         onClick={e => {
           e.preventDefault();

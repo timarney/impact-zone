@@ -130,8 +130,13 @@ h2 {
   transition: all;
 }
 
-.person:hover, .person.active {
+.person:not([disabled]):hover,
+.person.active {
   background-color: rgba(61, 61, 61, 0.5);
+}
+
+.person[disabled] {
+  background-color: rgba(61, 61, 61, 0.2);
 }
 
 .person .title {
@@ -142,6 +147,10 @@ h2 {
 .person .percent {
   color: #66c279;
   font-size: 0.9em;
+}
+
+.person[disabled] .name {
+  opacity: 0.2;
 }
 
 .person .name {
@@ -161,6 +170,39 @@ h2 {
   display: flex;
   justify-content: space-around;
 }
+
+.check {
+  margin-right: 20px;
+  filter: grayscale(100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.check[disabled] {
+  opacity: 0.3;
+}
+
+.check:not([disabled]):hover {
+  filter: grayscale(70%);
+  transform: scale(1.05);
+}
+
+.gear {
+  transition: all 0.2s ease-in-out;
+}
+
+.gear:hover {
+  transform: scale(1.05);
+}
+
+.check:active {
+  transform: scale(1.5);
+}
+
+.check.checked {
+  filter: none;
+}
+
+/* ==== */
 
 .present {
   color: #66c279;
@@ -243,33 +285,6 @@ h2 {
   display: flex;
 }
 
-.check {
-  margin-right: 20px;
-  filter: grayscale(100%);
-  transition: all 0.2s ease-in-out;
-}
-
-.check:hover {
-  filter: grayscale(70%);
-  transform: scale(1.05);
-}
-
-.gear{
-  transition: all 0.2s ease-in-out;
-}
-
-.gear:hover {
-  transform: scale(1.05);
-}
-
-.check:active {
-  transform: scale(1.5);
-}
-
-.check.checked {
-  filter: none;
-}
-
 .attendance-person {
   display: flex;
 }
@@ -278,12 +293,11 @@ h2 {
   margin-top: 10px;
 }
 
-
 /*--------------------------------------------*
  * POPPER
  *--------------------------------------------*/
 
- .popper {
+.popper {
   background: #222;
   color: white;
   width: 150px;
@@ -369,19 +383,17 @@ h2 {
   margin-right: 0;
 }
 
-
-.menu{
-  padding:10px;
+.menu {
+  padding: 10px;
 }
 
-.menu div{
-  margin-bottom:10px;
+.menu div {
+  margin-bottom: 10px;
 }
 
-.menu a{
-  color:#efefef;
+.menu a {
+  color: #efefef;
   text-decoration: none;
-
 }
 
 .__overlay {

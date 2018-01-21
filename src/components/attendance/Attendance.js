@@ -86,7 +86,6 @@ export class Attendance extends Component {
     return (
       <div className="App">
         <Header />
-
         <div className="people">
           <h2>
             Attendance - {getLocationName(locationId)} -{" "}
