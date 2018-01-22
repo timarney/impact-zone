@@ -36,11 +36,11 @@ class People extends Component {
       let streak;
       if (typeof people[item].streak.present !== "undefined") {
         streak = () => (
-          <div className="present">{`+${people[item].streak.present}`}</div>
+          <span className="present">{`+${people[item].streak.present}`}</span>
         );
       } else if (typeof people[item].streak.absent !== "undefined") {
         streak = () => (
-          <div className="absent">{`-${people[item].streak.absent}`}</div>
+          <span className="absent">{`-${people[item].streak.absent}`}</span>
         );
       }
 
@@ -135,7 +135,9 @@ class People extends Component {
           <div className="close-details" />
           <div className="details-header">
             <h2>{person.name}</h2>
-            <button className="btn" onClick={this.closeDetails}>CLOSE</button>
+            <button className="btn" onClick={this.closeDetails}>
+              CLOSE
+            </button>
           </div>
           {d.reverse()}
         </div>

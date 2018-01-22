@@ -124,8 +124,8 @@ h2 {
   box-sizing: border-box;
   position: relative;
   box-sizing: border-box;
-  padding: 10px;
-  min-width: 300px;
+  padding: 5px;
+  min-width: 250px;
   margin: 5px;
   background-color: #3d3d3d;
   transition: all;
@@ -151,6 +151,7 @@ h2 {
 .person .percent {
   color: #66c279;
   font-size: 0.9em;
+  align-self: flex-end;
 }
 
 .person[disabled] .name {
@@ -160,14 +161,19 @@ h2 {
 .person .name {
   flex: 4;
   color: #b4b4b4;
-  margin-bottom: 10px;
   font-weight: 200;
+  flex-direction: column;
+}
+
+.person .name span {
+  display: block;
+  margin-bottom: 5px;
 }
 
 .person .count {
   color: #ccc;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
 }
 
 .person .stats {
@@ -292,7 +298,20 @@ h2 {
 }
 
 .attendance-person .name {
-  margin-top: 10px;
+  margin-top: 5px;
+}
+
+.status-icons hr {
+  opacity: 0.1;
+}
+
+.status-icons .icons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.status-icons .icons svg {
+  margin-right: 10px;
 }
 
 /*--------------------------------------------*
@@ -395,7 +414,22 @@ h2 {
 .menu div {
   display: flex;
   justify-content: space-between;
-  margin-bottom:20px;
+}
+.menu div:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.menu div a {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menu div a:hover,
+.menu div a:hover svg path,
+.menu div a:hover svg ellipse {
+  color: #666666;
+  fill: #666666;
 }
 
 .menu a {

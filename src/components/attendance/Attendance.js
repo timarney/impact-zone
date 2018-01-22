@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import { attendanceList } from "../../actions";
 import { syncPeople, now } from "../../api/sync";
 import { getLocationName } from "../../util";
-import Box from "./Box";
+import Person from "./Person";
 import { DateTime } from "luxon";
 import sortBy from "sort-by";
 
@@ -65,7 +65,7 @@ export class Attendance extends Component {
       .sort(sortBy("name"))
       .map((item, index) => {
         return (
-          <Box
+          <Person
             active={activeItem}
             onClick={this.handleClick}
             key={item.id}

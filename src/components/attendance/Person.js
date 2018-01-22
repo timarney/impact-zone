@@ -7,18 +7,19 @@ import { Tooltip } from "./Tooltip";
 import classNames from "classnames";
 import Aux from "react-aux";
 import OptionMenu from "./OptionMenu";
+import StatusIcons from "./StatusIcons";
 
-class Box extends Component {
+class Person extends Component {
   state = {};
   render() {
     const { item, locationId, date, active, onClick, disabled } = this.props;
     const placement = "left";
-
+    const firstLast = item.name.split(" ");
     const isActiveItem = active === item.id;
 
     const boxClass = classNames({
       person: true,
-      "attendance-person": true,
+
       active: isActiveItem
     });
 
@@ -31,11 +32,17 @@ class Box extends Component {
     return (
       <Manager key={item.id}>
         <div disabled={disableItem} className={boxClass}>
-          <CheckIn item={item} locationId={locationId} date={date} />
-          <div className="name">{item.name}</div>
-          <Target>
-            <Settings item={item} onClick={onClick} />
-          </Target>
+          <div className="attendance-person">
+            <CheckIn item={item} locationId={locationId} date={date} />
+            <div className="name">
+              <span>{firstLast[0]}</span> <span>{firstLast[1]}</span>
+            </div>
+            <Target>
+              <Settings item={item} onClick={onClick} />
+            </Target>
+          </div>
+
+          <StatusIcons item={item} />
         </div>
 
         {item.id === active && (
@@ -62,4 +69,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Box);
+export default connect(mapStateToProps)(Person);

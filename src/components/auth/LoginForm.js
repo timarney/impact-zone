@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import WarningIcon from "../../icons/Warning";
+import { WarningIcon } from "../../icons/";
 
 class LoginForm extends Component {
   clearFields = () => {};
