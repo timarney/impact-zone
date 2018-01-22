@@ -50,7 +50,7 @@ class Person extends Component {
             <Popper placement={placement}>
               {({ popperProps = false }) => (
                 <Tooltip popperProps={popperProps}>
-                  <OptionMenu />
+                  <OptionMenu item={item} />
                 </Tooltip>
               )}
             </Popper>

@@ -12,8 +12,6 @@ class CheckIn extends Component {
       check: true,
       checked: item.in
     });
-
-    console.log(disabled);
     return (
       <a
         data-in={item.in}

@@ -81,12 +81,20 @@ export class Attendance extends Component {
   //
 
   render() {
-    const { locationId, date } = this.props;
+    const { locationId, date, activeItem, dispatch } = this.props;
 
     return (
       <div className="App">
         <Header />
-        <div className="people">
+        <div
+          className="people"
+          onClick={e => {
+            const prop = e.target.dataset["menu"];
+            if (activeItem && !prop) {
+              dispatch({ type: "ACTIVE_ITEM", payload: false });
+            }
+          }}
+        >
           <h2>
             Attendance - {getLocationName(locationId)} -{" "}
             {DateTime.fromISO(date).toFormat("LLL dd yyyy")}

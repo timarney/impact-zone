@@ -78,8 +78,21 @@ export function removeRef(id) {
   }
 }
 
+export const updatePersonProp = function(locationId, date, id, prop, val) {
+  if (!prop) {
+    console.error("No prop passed to update", prop);
+    return;
+  }
+  try {
+    const ref = firebase.database().ref(`${locationId}/${date}`);
+    let idRef = ref.child("people").child(id);
+    idRef.child(prop).set(val);
+  } catch (e) {
+    console.log(e.message);
+    console.log(locationId, date, id, prop, val);
+  }
+};
+
 export function checkIn(locationId, date, id, val) {
-  const ref = firebase.database().ref(`${locationId}/${date}`);
-  let idRef = ref.child("people").child(id);
-  idRef.child("in").set(val);
+  updatePersonProp(locationId, date, id, "in", val);
 }
