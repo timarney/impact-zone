@@ -19,7 +19,6 @@ class Person extends Component {
 
     const boxClass = classNames({
       person: true,
-
       active: isActiveItem
     });
 
