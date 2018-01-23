@@ -5,18 +5,7 @@ import { Login, Reset } from "./auth";
 import Stats from "./stats/Stats";
 import NotFound from "./NotFound";
 import Attendance from "./attendance/Attendance";
-
-/* 
-
-TODO:
-- default to stats view
-- add "add new attendance link to top of the week view"
-- don't allow add new attendance if attendance exists for that date
-- stats view can link to archive for X date
-- attendance/25/Pineview 2017/2017-11-28
-
-
-*/
+import Signature from "./signature/Signature";
 
 export const Routes = () => (
   <Router>
@@ -24,6 +13,7 @@ export const Routes = () => (
       <Switch>
         <Route exact path="/" component={Login} />
         <PrivateRoute path="/attendance/:id?/:date?" component={Attendance} />
+        <PrivateRoute path="/signature/:id/:date/:user" component={Signature} />
         <PrivateRoute path="/stats/:id" component={Stats} />
         <Route exact path="/reset" component={Reset} />
         <Route path="*" component={NotFound} />

@@ -5680,6 +5680,10 @@ react-scripts@1.1.0:
   optionalDependencies:
     fsevents "1.1.2"
 
+"react-signature-pad@https://github.com/timarney/react-signature-pad.git":
+  version "0.0.7"
+  resolved "https://github.com/timarney/react-signature-pad.git#fb223fa5e13c3c842acd07926bf4c4f8f6a29d3d"
+
 react@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"

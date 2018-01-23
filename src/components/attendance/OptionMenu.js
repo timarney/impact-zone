@@ -8,7 +8,7 @@ import {
 } from "../../icons";
 import { updatePersonProp } from "../../util/firebase";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames";
 
 class OptionMenu extends Component {
@@ -31,7 +31,7 @@ class OptionMenu extends Component {
   };
 
   render() {
-    const { item } = this.props;
+    const { item, locationId, date } = this.props;
 
     const lateClass = classNames({
       active: item.late
@@ -83,15 +83,12 @@ class OptionMenu extends Component {
           </a>
         </div>
         <div>
-          <a
-            href="#signout"
+          <Link
+            to={`/signature/${locationId}/${date}/${item.id}`}
             className={signatureClass}
-            onClick={() => {
-              alert("not connected yet");
-            }}
           >
             Signature {item.signature ? <UnlockIcon /> : <LockIcon />}
-          </a>
+          </Link>
         </div>
       </div>
     );
