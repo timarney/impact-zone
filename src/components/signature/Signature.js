@@ -24,24 +24,26 @@ class Signature extends Component {
     //console.log("ere",previousLocation);
     return (
       <div className="signature">
-        Sign Here{" "}
-        <a
-          href="#clear"
-          onClick={() => {
-            history.goBack();
-          }}
-        >
-          Cancel
-        </a>
-        <SignaturePad
-          clearButton="true"
-          ref={node => {
-            this.signature = node;
-          }}
-        />
-        <a href="#sign" onClick={this.onSubmit}>
-          Submit
-        </a>
+        <div>
+          <SignaturePad
+            clearButton="true"
+            ref={node => {
+              this.signature = node;
+            }}
+          />
+          <a
+            href="#clear"
+            className="btn"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            Cancel
+          </a>
+          <a href="#sign" className={"btn"} onClick={this.onSubmit}>
+            Submit
+          </a>
+        </div>
       </div>
     );
   }
