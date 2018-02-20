@@ -42,25 +42,23 @@ export class Attendance extends Component {
 
     Items = Object.values(accounts.people)
       .filter(item => {
-        /*
-        let term = this.state.term.toLowerCase();
-        if (term == "") return true;
+        const s = {};
+        s.term = "a";
+        let term = s.term.toLowerCase();
+        if (term === "") return true;
         let str = item.name.toLowerCase();
         return str.search(term) > -1;
-        */
-
-        return true;
       })
       .filter(item => {
-        /*
-        if (this.state.filter_in && this.state.filter_out) return true;
-        if (this.state.filter_in && item.in) return true;
-        if (this.state.filter_out && !item.in) return true;
+        const s = {};
+        //filters
+        s.filter_in = true;
+        s.filter_out = true;
 
+        if (s.filter_in && s.filter_out) return true;
+        if (s.filter_in && item.in) return true;
+        if (s.filter_out && !item.in) return true;
         return false;
-        */
-
-        return true;
       })
       .sort(sortBy("name"))
       .map((item, index) => {

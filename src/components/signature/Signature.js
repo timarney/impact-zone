@@ -19,7 +19,6 @@ class Signature extends Component {
     const data = this.signature.toDataURL();
     updatePersonProp(locationId, date, userId, "signature", data);
     history.goBack();
-    //idRef.child("guardian_out").set(this.signatureGuardian);
   };
 
   render() {
@@ -27,7 +26,6 @@ class Signature extends Component {
     //console.log("ere",previousLocation);
     return (
       <div className="signature">
-
         <SignaturePad
           clearButton="true"
           ref={node => {
@@ -61,7 +59,6 @@ class Signature extends Component {
 
           }}
         />
-
       </div>
     );
   }
