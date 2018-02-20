@@ -36,7 +36,7 @@ export function login(cb, user) {
     .then(response => {
       cb(null);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       cb(error);
     });
 }
@@ -45,10 +45,10 @@ export function signout(cb) {
   firebase
     .auth()
     .signOut()
-    .then(function() {
+    .then(function () {
       cb();
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log("signout err", error);
       cb(error);
     });
@@ -59,10 +59,10 @@ export function resetPassword(email, cb) {
 
   auth
     .sendPasswordResetEmail(email)
-    .then(function() {
+    .then(function () {
       cb("email sent");
     })
-    .catch(function(error) {
+    .catch(function (error) {
       cb(error);
     });
 }
@@ -78,7 +78,7 @@ export function removeRef(id) {
   }
 }
 
-export const updatePersonProp = function(locationId, date, id, prop, val) {
+export const updatePersonProp = function (locationId, date, id, prop, val) {
   if (!prop) {
     console.error("No prop passed to update", prop);
     return;
@@ -92,6 +92,22 @@ export const updatePersonProp = function(locationId, date, id, prop, val) {
     console.log(locationId, date, id, prop, val);
   }
 };
+
+export const getPersonData = async function (locationId, date, id, prop, val) {
+  if (!prop) {
+    console.error("No prop passed to update", prop);
+    return;
+  }
+  try {
+    const path = `${locationId}/${date}/people/${id}`;
+    console.log("path", path);
+    const ref = await firebase.database().ref(path).once('value');
+    return ref.val();
+  } catch (e) {
+    console.log(e.message);
+    console.log(locationId, date, id, prop, val);
+  }
+}
 
 export function checkIn(locationId, date, id, val) {
   updatePersonProp(locationId, date, id, "in", val);

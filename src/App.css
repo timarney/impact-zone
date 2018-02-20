@@ -206,6 +206,19 @@ a.btn {
   height: 40px;
 }
 
+.m-signature-pad--footer button{
+  display: inline-block;
+  margin-top:10px;
+}
+
+.m-signature-pad--footer .cancel{
+  margin-right:20px;
+}
+
+.m-signature-pad--footer .save{
+  background-color:rgb(102, 194, 121);
+}
+
 .m-signature-pad--footer .description {
   color: #c3c3c3;
   text-align: center;
@@ -213,17 +226,9 @@ a.btn {
   margin-top: 1.8em;
 }
 
-.m-signature-pad--footer .button {
-  position: absolute;
-  bottom: 0;
-}
-
-.m-signature-pad--footer .button.clear {
-  left: 0;
-}
-
-.m-signature-pad--footer .button.save {
-  right: 0;
+.m-signature-pad--footer{
+  display:flex;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 1024px) {

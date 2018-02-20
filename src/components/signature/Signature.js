@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import SignaturePad from "react-signature-pad";
-import { updatePersonProp } from "../../util/firebase";
+import SignaturePad from "./index";
+import { updatePersonProp, getPersonData } from "../../util/firebase";
 import { connect } from "react-redux";
 
 class Signature extends Component {
   state = {};
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log("mounted", this.props);
+    const { locationId, date, userId } = this.props;
+    let d = await getPersonData(locationId, date, userId, "signature");
+    this.signature.fromDataURL(d.signature);
   }
 
   onSubmit = () => {
@@ -24,24 +27,41 @@ class Signature extends Component {
     //console.log("ere",previousLocation);
     return (
       <div className="signature">
-        Sign Here{" "}
-        <a
-          href="#clear"
-          onClick={() => {
-            history.goBack();
-          }}
-        >
-          Cancel
-        </a>
+
         <SignaturePad
           clearButton="true"
           ref={node => {
             this.signature = node;
           }}
+          render={() => {
+            return (
+              <div className="m-signature-pad--footer">
+                <div>
+                  <button
+                    className="btn btn-default button cancel"
+                    onClick={() => {
+                      history.goBack();
+                    }}
+                  >
+                    Cancel
+        </button>
+                  <button className="btn btn-default button clear" onClick={() => {
+                    this.signature.clear();
+                  }}>
+                    Clear
+                    </button>
+                </div>
+                <div>
+                  <button className="btn btn-default button save" onClick={this.onSubmit}>
+                    Submit
+        </button>
+                </div>
+              </div>
+            )
+
+          }}
         />
-        <a href="#sign" onClick={this.onSubmit}>
-          Submit
-        </a>
+
       </div>
     );
   }
