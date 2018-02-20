@@ -11,7 +11,7 @@ class PrivateRoute extends React.Component {
   render() {
     const { component: Component, ...rest } = this.props;
     if (this.props.loading) {
-      return <div>LOADING !!</div>;
+      return <div class="show-spinner"><div class="spinner"></div></div>;
     } else {
       return (
         <Route
@@ -25,8 +25,8 @@ class PrivateRoute extends React.Component {
                 }}
               />
             ) : (
-              <Component {...this.props} />
-            );
+                <Component {...this.props} />
+              );
           }}
         />
       );
