@@ -100,7 +100,6 @@ export const getPersonData = async function (locationId, date, id, prop, val) {
   }
   try {
     const path = `${locationId}/${date}/people/${id}`;
-    console.log("path", path);
     const ref = await firebase.database().ref(path).once('value');
     return ref.val();
   } catch (e) {

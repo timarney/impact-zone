@@ -16,7 +16,7 @@ export class Attendance extends Component {
     if (date === now) {
       syncPeople(locationId);
     } else {
-      console.log("not today");
+      //console.log("not today");
     }
 
     attendanceList(locationId, date);
@@ -28,7 +28,7 @@ export class Attendance extends Component {
       dispatch({ type: "ACTIVE_ITEM", payload: false });
       return;
     }
-    dispatch({ type: "ACTIVE_ITEM", payload: id });
+    dispatch({ type: "ACTIVE_ITEM", payload: { id } });
   };
 
   getListItems() {
@@ -87,6 +87,7 @@ export class Attendance extends Component {
         <div
           className="people"
           onClick={e => {
+            // handle click outside
             const prop = e.target.dataset["menu"];
             if (activeItem && !prop) {
               dispatch({ type: "ACTIVE_ITEM", payload: false });

@@ -75,6 +75,8 @@ class Weekly extends Component {
       );
     }
 
+    d = d.reverse();
+
     return (
       <div className="weeks">
         <h2 className={headerClass}>{title}</h2>

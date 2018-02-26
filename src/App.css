@@ -183,7 +183,7 @@ a.btn {
   position: absolute;
   left: 20px;
   right: 20px;
-  top: 20px;
+  top: 60px;
   bottom: 60px;
   border: 1px solid #f4f4f4;
 }
@@ -197,6 +197,17 @@ a.btn {
   border-radius: 4px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
 }
+
+.m-signature-pad--header{
+  display: flex;
+  justify-content: center;
+  margin-top:20px;
+}
+
+.m-signature-pad--header select{
+  font-size:18px;
+}
+
 
 .m-signature-pad--footer {
   position: absolute;

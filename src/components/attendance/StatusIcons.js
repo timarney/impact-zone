@@ -8,7 +8,7 @@ import {
 } from "../../icons";
 import { updatePersonProp } from "../../util/firebase";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 class StatusIcons extends Component {
   state = {};
@@ -30,7 +30,7 @@ class StatusIcons extends Component {
   };
 
   render() {
-    const { item, disabled } = this.props;
+    const { locationId, date, item, disabled } = this.props;
     return (
       <div className="status-icons" disabled={disabled}>
         <hr />
@@ -55,17 +55,18 @@ class StatusIcons extends Component {
             </a>
           )}
           {item.require_signature && (
-            <a
-              href="#signout"
+            <Link
+              to={`/signature/${locationId}/${date}/${item.id}`}
               onClick={() => {
-                alert("not connected yet");
+                const { dispatch } = this.props;
+                dispatch({ type: "ACTIVE_ITEM", payload: { id: item.id } });
               }}
             >
               {item.signature ? <UnlockIcon /> : <LockIcon />}
-            </a>
+            </Link>
           )}
         </div>
-      </div>
+      </div >
     );
   }
 }

@@ -3,12 +3,12 @@ import { withRouter } from "react-router-dom";
 import SignaturePad from "./index";
 import { updatePersonProp, getPersonData } from "../../util/firebase";
 import { connect } from "react-redux";
+import { GuardianDropDown } from "../GuardianDropDown";
 
 class Signature extends Component {
   state = {};
 
   async componentDidMount() {
-    console.log("mounted", this.props);
     const { locationId, date, userId } = this.props;
     let d = await getPersonData(locationId, date, userId, "signature");
     this.signature.fromDataURL(d.signature);
@@ -21,23 +21,42 @@ class Signature extends Component {
     history.goBack();
   };
 
+  updateGuardian = (data) => {
+    const { locationId, date, userId } = this.props;
+    updatePersonProp(locationId, date, userId, "guardian_out", data);
+  }
+
   render() {
-    const { history } = this.props;
-    //console.log("ere",previousLocation);
+    const { history, item } = this.props;
+
+    let selected = false;
+
+    if (item && item.guardian_out && item.guardian_out.payload) {
+      selected = item.guardian_out.payload
+    }
+
     return (
       <div className="signature">
+
         <SignaturePad
           clearButton="true"
           ref={node => {
             this.signature = node;
           }}
-          render={() => {
+          header={() => {
+            return <div className="m-signature-pad--header">
+              {item && item.guardians ? <GuardianDropDown onChange={this.updateGuardian} selected={selected} options={item.guardians} /> : null}
+            </div>
+          }}
+          footer={() => {
             return (
               <div className="m-signature-pad--footer">
                 <div>
                   <button
                     className="btn btn-default button cancel"
                     onClick={() => {
+                      const { dispatch } = this.props;
+                      dispatch({ type: "ACTIVE_ITEM", payload: false });
                       history.goBack();
                     }}
                   >
@@ -68,7 +87,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     locationId: ownProps.match.params.id,
     date: ownProps.match.params.date,
-    userId: ownProps.match.params.user
+    userId: ownProps.match.params.user,
+    item: state.main.item
   };
 };
 

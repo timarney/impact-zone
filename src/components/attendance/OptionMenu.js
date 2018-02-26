@@ -31,7 +31,7 @@ class OptionMenu extends Component {
   };
 
   render() {
-    const { item, locationId, date } = this.props;
+    const { item, locationId, date, dispatch } = this.props;
 
     const lateClass = classNames({
       active: item.late
@@ -86,6 +86,10 @@ class OptionMenu extends Component {
           <Link
             to={`/signature/${locationId}/${date}/${item.id}`}
             className={signatureClass}
+            data-menu="true"
+            onClick={() => {
+              dispatch({ type: "ACTIVE_ITEM", payload: { id: item.id } });
+            }}
           >
             Signature {item.signature ? <UnlockIcon /> : <LockIcon />}
           </Link>
