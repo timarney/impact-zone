@@ -6,24 +6,37 @@ import { connect } from "react-redux";
 import { GuardianDropDown } from "../GuardianDropDown";
 
 class Signature extends Component {
-  state = {};
+  state = { guardian_out: false };
 
   async componentDidMount() {
     const { locationId, date, userId } = this.props;
     let d = await getPersonData(locationId, date, userId, "signature");
-    this.signature.fromDataURL(d.signature);
+    if (d && d.signature) {
+      this.signature.fromDataURL(d.signature);
+    }
+
   }
 
   onSubmit = () => {
-    const { locationId, date, userId, history } = this.props;
+    const { locationId, date, userId, history, dispatch } = this.props;
+    const { guardian_out } = this.state;
     const data = this.signature.toDataURL();
     updatePersonProp(locationId, date, userId, "signature", data);
+
+    if (guardian_out) {
+      updatePersonProp(locationId, date, userId, "guardian_out", guardian_out);
+    }
+
+
     history.goBack();
+
+    dispatch({ type: "ACTIVE_ITEM", payload: false });
   };
 
   updateGuardian = (data) => {
-    const { locationId, date, userId } = this.props;
-    updatePersonProp(locationId, date, userId, "guardian_out", data);
+    //const { locationId, date, userId } = this.props;
+    this.setState({ guardian_out: data });
+    //updatePersonProp(locationId, date, userId, "guardian_out", data);
   }
 
   render() {
