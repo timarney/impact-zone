@@ -89,10 +89,30 @@
 
 /* DETAILS BOX */
 
+
 .detailsBox .inner {
   padding: 20px;
   background-color: #2b2b2b;
 }
+
+.details-inner{
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .details{
+     width:50%;
+  }
+
+  .details-inner{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+
 
 .detailsBox .inner h2 {
   padding-top: 0;

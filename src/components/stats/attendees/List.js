@@ -139,7 +139,15 @@ class List extends Component {
               CLOSE
             </button>
           </div>
-          {d.reverse()}
+
+          <div className="details-inner">
+            <div className="weeks">
+              {d.reverse()}
+            </div>
+            <div className="details">
+              Person Details
+            </div>
+          </div>
         </div>
       </div>
     );
