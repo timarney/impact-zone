@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import Animated from "animated/lib/targets/react-dom";
 import sortbyorder from "lodash.sortbyorder";
-import { tempPeople } from "../../util/skelton";
-import Person from "./Person";
+import { tempItems } from "../../../util/skelton";
+import ListItem from "./ListItem";
 import classNames from "classnames";
 import { DateTime } from "luxon";
-import { detailsBoxTransition, detailsBoxProps } from "../../transition";
+import { detailsBoxTransition, detailsBoxProps } from "../../../transition";
 
-class People extends Component {
+class List extends Component {
   refs = {};
   state = {
     animation: detailsBoxProps,
-    activePerson: null
+    activeItem: null
   };
 
   componentDidMount() {
@@ -26,28 +26,28 @@ class People extends Component {
     const { attendance } = this.props;
 
     let d = [];
-    let people = attendance.people;
+    let items = attendance.people;
 
-    for (let item in people) {
-      let total = people[item].present + people[item].absent;
+    for (let item in items) {
+      let total = items[item].present + items[item].absent;
 
-      //if (people[item].percent === 0) continue;
+      //if (items[item].percent === 0) continue;
 
       let streak;
-      if (typeof people[item].streak.present !== "undefined") {
+      if (typeof items[item].streak.present !== "undefined") {
         streak = () => (
-          <span className="present">{`+${people[item].streak.present}`}</span>
+          <span className="present">{`+${items[item].streak.present}`}</span>
         );
-      } else if (typeof people[item].streak.absent !== "undefined") {
+      } else if (typeof items[item].streak.absent !== "undefined") {
         streak = () => (
-          <span className="absent">{`-${people[item].streak.absent}`}</span>
+          <span className="absent">{`-${items[item].streak.absent}`}</span>
         );
       }
 
       d.push({
         name: item,
-        total: `${people[item].present}/${total}`,
-        percent: people[item].percent,
+        total: `${items[item].present}/${total}`,
+        percent: items[item].percent,
         streak
       });
     }
@@ -55,27 +55,27 @@ class People extends Component {
     return sortbyorder(d, ["percent", "name"], ["desc", "asc"]);
   }
 
-  renderPerson(person, index) {
-    let key = person.name ? person.name : index;
-    let percent = person.percent ? `${person.percent} %` : null;
+  renderItem(item, index) {
+    let key = item.name ? item.name : index;
+    let percent = item.percent ? `${item.percent} %` : null;
     return (
-      <Person
+      <ListItem
         key={key}
-        person={person}
+        item={item}
         percent={percent}
         openDetails={this.openDetails}
       />
     );
   }
 
-  openDetails = (e, person) => {
+  openDetails = (e, item) => {
     let { animation } = this.state;
     let y = this.el.getBoundingClientRect();
     let x = e.getBoundingClientRect();
 
     detailsBoxTransition(x, y, animation, "up");
 
-    this.setState({ activePerson: person });
+    this.setState({ activeItem: item });
   };
 
   closeDetails = () => {
@@ -89,16 +89,16 @@ class People extends Component {
     });
   };
 
-  personDetails = () => {
+  itemDetails = () => {
     const { items } = this.props;
-    const person = this.state.activePerson;
-    if (!person) return null;
+    const item = this.state.activeItem;
+    if (!item) return null;
 
     let d = [];
 
-    for (let item in items) {
-      let f = DateTime.fromISO(item).toFormat("ccc dd LLL yyyy");
-      let obj = items[item].people;
+    for (let key in items) {
+      let f = DateTime.fromISO(key).toFormat("ccc dd LLL yyyy");
+      let obj = items[key].people;
       let attend = (
         <span style={{ color: "rgb(254, 115, 123)", marginRight: "15px" }}>
           ✘
@@ -107,7 +107,7 @@ class People extends Component {
 
       // eslint-disable-next-line
       for (let [k, v] of Object.entries(obj)) {
-        if (v.name === person.name) {
+        if (v.name === item.name) {
           if (v.in) {
             attend = (
               <span
@@ -121,7 +121,7 @@ class People extends Component {
       }
 
       d.push(
-        <div className="week" key={item}>
+        <div className="week" key={key}>
           <div>
             {attend} {f}
           </div>
@@ -134,7 +134,7 @@ class People extends Component {
         <div>
           <div className="close-details" />
           <div className="details-header">
-            <h2>{person.name}</h2>
+            <h2>{item.name}</h2>
             <button className="btn" onClick={this.closeDetails}>
               CLOSE
             </button>
@@ -166,13 +166,13 @@ class People extends Component {
       ]
     };
 
-    let people = this.order();
+    let items = this.order();
     let title = `Attendees`;
 
     if (!attendance) {
-      people = tempPeople();
+      items = tempItems();
     } else {
-      title = `${people.length} ${title}`;
+      title = `${items.length} ${title}`;
     }
 
     return (
@@ -183,7 +183,7 @@ class People extends Component {
           style={animatedStyle}
           onClick={this.closeDetails}
         >
-          <div className="inner">{this.personDetails()}</div>
+          <div className="inner">{this.itemDetails()}</div>
         </Animated.div>
 
         <div
@@ -192,8 +192,8 @@ class People extends Component {
             this.el = el;
           }}
         >
-          {people.map((item, index) => {
-            return this.renderPerson(item, index);
+          {items.map((item, index) => {
+            return this.renderItem(item, index);
           })}
         </div>
       </div>
@@ -201,4 +201,4 @@ class People extends Component {
   }
 }
 
-export default People;
+export default List;

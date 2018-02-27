@@ -5,6 +5,6 @@ let person = {
   percent: ""
 };
 
-export function tempPeople() {
+export function tempItems() {
   return [person, person, person, person, person, person, person, person];
 }

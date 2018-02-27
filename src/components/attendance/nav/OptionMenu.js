@@ -5,8 +5,8 @@ import {
   WalkIcon,
   LockIcon,
   UnlockIcon
-} from "../../icons";
-import { updatePersonProp } from "../../util/firebase";
+} from "../../../icons";
+import { updatePersonProp } from "../../../util/firebase";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames";

@@ -1,3 +1,3 @@
-export { default as OverallAttendance } from "./OverallAttendance";
-export { default as People} from "./People";
-export { default as Weekly} from "./Weekly";
+export { default as OverallAttendance } from "./overall/OverallAttendance";
+export { default as List } from "./attendees/List";
+export { default as Weekly } from "./weekly/Weekly";

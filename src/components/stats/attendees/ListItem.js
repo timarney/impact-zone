@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 
-class Person extends Component {
+class ListItem extends Component {
   state = {};
   render() {
-    let { person, percent, openDetails } = this.props;
-    const firstLast = person.name.split(" ");
+    let { item, percent, openDetails } = this.props;
+    const firstLast = item.name.split(" ");
 
     return (
       <div
         className="person"
         onClick={() => {
-          openDetails(this.el, this.person);
+          openDetails(this.el, this.item);
         }}
         ref={el => {
           this.el = el;
-          this.person = person;
+          this.item = item;
         }}
       >
         <div className="title">
@@ -23,7 +23,7 @@ class Person extends Component {
           </div>
           <div className="count">
             <span>
-              {person.streak()} <span>{person.total}</span>
+              {item.streak()} <span>{item.total}</span>
             </span>
             <div className="percent">{percent}</div>
           </div>
@@ -33,4 +33,4 @@ class Person extends Component {
   }
 }
 
-export default Person;
+export default ListItem;

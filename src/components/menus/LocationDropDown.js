@@ -1,4 +1,4 @@
-import { locations } from "../api/locations";
+import { locations } from "../../api/locations";
 import classNames from "classnames";
 
 import React, { Component } from "react";

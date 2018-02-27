@@ -6,12 +6,12 @@ import Aux from "react-aux";
 import { DateTime } from "luxon";
 import { watchRef } from "../../util/firebase";
 import { getAttendance } from "../../util/attendance";
-import { OverallAttendance, Weekly, People } from "./index";
+import { OverallAttendance, Weekly, List } from "./index";
 import Header from "../Header";
-import { LocationDropDown } from "../LocationDropDown";
+import { LocationDropDown } from "../menus/LocationDropDown";
 
 const Locations = (locationId, onChange) => {
-  return function(disabled) {
+  return function (disabled) {
     return (
       <LocationDropDown
         disabled={disabled}
@@ -145,7 +145,7 @@ export class Stats extends Component {
 
         <div className="people">
           <Animated.div style={{ opacity: this.state.val }}>
-            <People attendance={attendance} items={items} />
+            <List attendance={attendance} items={items} />
           </Animated.div>
         </div>
       </div>

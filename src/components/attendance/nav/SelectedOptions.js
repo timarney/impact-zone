@@ -5,12 +5,12 @@ import {
   WalkIcon,
   LockIcon,
   UnlockIcon
-} from "../../icons";
-import { updatePersonProp } from "../../util/firebase";
+} from "../../../icons";
+import { updatePersonProp } from "../../../util/firebase";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
-class StatusIcons extends Component {
+class SelectedOptions extends Component {
   state = {};
 
   setProperty = e => {
@@ -79,4 +79,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(StatusIcons));
+export default withRouter(connect(mapStateToProps)(SelectedOptions));

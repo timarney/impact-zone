@@ -1,25 +1,31 @@
 import React, { Component } from "react";
-import Header from "../Header";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
+import { DateTime } from "luxon";
+import sortBy from "sort-by";
+import Header from "../Header";
 import { attendanceList } from "../../actions";
 import { syncPeople, now } from "../../api/sync";
 import { getLocationName } from "../../util";
-import Person from "./Person";
-import { DateTime } from "luxon";
-import sortBy from "sort-by";
+import ListItem from "./ListItem";
 
 export class Attendance extends Component {
   componentDidMount() {
     const { locationId, date, attendanceList } = this.props;
     if (date === now) {
       syncPeople(locationId);
-    } else {
-      //console.log("not today");
     }
 
     attendanceList(locationId, date);
+  }
+
+  handleClickOutside = (e) => {
+    const { dispatch, activeItem } = this.props;
+    const prop = e.target.dataset["menu"];
+    if (activeItem && !prop) {
+      dispatch({ type: "ACTIVE_ITEM", payload: false });
+    }
   }
 
   handleClick = id => {
@@ -63,7 +69,7 @@ export class Attendance extends Component {
       .sort(sortBy("name"))
       .map((item, index) => {
         return (
-          <Person
+          <ListItem
             active={activeItem}
             onClick={this.handleClick}
             key={item.id}
@@ -79,20 +85,14 @@ export class Attendance extends Component {
   //
 
   render() {
-    const { locationId, date, activeItem, dispatch } = this.props;
+    const { locationId, date } = this.props;
 
     return (
       <div className="App">
         <Header />
         <div
           className="people"
-          onClick={e => {
-            // handle click outside
-            const prop = e.target.dataset["menu"];
-            if (activeItem && !prop) {
-              dispatch({ type: "ACTIVE_ITEM", payload: false });
-            }
-          }}
+          onClick={this.handleClickOutside}
         >
           <h2>
             Attendance - {getLocationName(locationId)} -{" "}

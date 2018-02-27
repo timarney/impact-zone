@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import CheckIcon from "../../icons/Check";
-import { checkIn } from "../../util/firebase";
+import CheckIcon from "../../../icons/Check";
+import { checkIn } from "../../../util/firebase";
 import { connect } from "react-redux";
 import classNames from "classnames";
 

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import GearIcon from "../../icons/Gear";
+import GearIcon from "../../../icons/Gear";
 import classNames from "classnames";
 
-class Settings extends Component {
+class SettingsToggle extends Component {
   state = {};
   render() {
     const { item, onClick } = this.props;
@@ -24,4 +24,4 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+export default SettingsToggle;

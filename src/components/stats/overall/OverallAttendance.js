@@ -26,7 +26,6 @@ class OverallAttendance extends Component {
             duration: 1000,
             onEnd: () => {
               //console.log("end", location);
-              //onUpdate();
             }
           }}
           colorScale={colours}

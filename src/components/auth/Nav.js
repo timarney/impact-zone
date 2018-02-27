@@ -13,7 +13,6 @@ const Menu = ({ history, isAuthenticated, locationId }) => {
           opacity: 0
         }}
       >
-        {" "}
         Stats
       </NavLink>
 

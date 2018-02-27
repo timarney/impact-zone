@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import SignaturePad from "./index";
 import { updatePersonProp, getPersonData } from "../../util/firebase";
 import { connect } from "react-redux";
-import { GuardianDropDown } from "../GuardianDropDown";
+import { GuardianDropDown } from "../menus/GuardianDropDown";
 
 class Signature extends Component {
   state = { guardian_out: false };

@@ -1,11 +1,10 @@
-import { locations } from "../api/locations";
 import classNames from "classnames";
 
 import React, { Component } from "react";
 
 export class GuardianDropDown extends Component {
   state = {
-    options: locations
+    options: []
   };
 
   render() {

@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import CheckIn from "./Checkin";
-import Settings from "./Settings";
 import { connect } from "react-redux";
 import { Manager, Target, Popper } from "react-popper";
-import { Tooltip } from "./Tooltip";
 import classNames from "classnames";
 import Aux from "react-aux";
-import OptionMenu from "./OptionMenu";
-import StatusIcons from "./StatusIcons";
+import { Tooltip, OptionMenu, CheckIn, SelectedOptions, SettingsToggle } from "./nav/index";
 
-class Person extends Component {
+class ListItem extends Component {
   state = {};
   render() {
     const { item, locationId, date, active, onClick, disabled } = this.props;
@@ -32,18 +28,21 @@ class Person extends Component {
       <Manager key={item.id}>
         <div disabled={disableItem} className={boxClass}>
           <div className="attendance-person">
+            {/* Check in / out icon */}
             <CheckIn item={item} locationId={locationId} date={date} />
             <div className="name">
               <span>{firstLast[0]}</span> <span>{firstLast[1]}</span>
             </div>
             <Target>
-              <Settings item={item} onClick={onClick} />
+              {/* Gear Icon to toggle settings menu */}
+              <SettingsToggle item={item} onClick={onClick} />
             </Target>
           </div>
 
-          <StatusIcons item={item} />
+          <SelectedOptions item={item} />
         </div>
 
+        {/* options menu */}
         {item.id === active && (
           <Aux>
             <Popper placement={placement}>
@@ -53,8 +52,6 @@ class Person extends Component {
                 </Tooltip>
               )}
             </Popper>
-
-            {/*  <div className="__overlay"></div> */}
           </Aux>
         )}
       </Manager>
@@ -68,4 +65,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Person);
+export default connect(mapStateToProps)(ListItem);
