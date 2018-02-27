@@ -6,6 +6,7 @@ import ListItem from "./ListItem";
 import classNames from "classnames";
 import { DateTime } from "luxon";
 import { detailsBoxTransition, detailsBoxProps } from "../../../transition";
+import AccountCard from "../../account/AccountCard";
 
 class List extends Component {
   refs = {};
@@ -45,6 +46,7 @@ class List extends Component {
       }
 
       d.push({
+        id: items[item].id,
         name: item,
         total: `${items[item].present}/${total}`,
         percent: items[item].percent,
@@ -93,7 +95,6 @@ class List extends Component {
     const { items } = this.props;
     const item = this.state.activeItem;
     if (!item) return null;
-
     let d = [];
 
     for (let key in items) {
@@ -145,7 +146,7 @@ class List extends Component {
               {d.reverse()}
             </div>
             <div className="details">
-              Person Details
+              <AccountCard uid={item.id} />
             </div>
           </div>
         </div>

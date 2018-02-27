@@ -10,8 +10,10 @@ function personPlaceAttendance(data, obj) {
 
     let name = data[prop].name;
 
+    let id = data[prop].id;
+
     if (!obj.people[name]) {
-      obj.people[name] = { present: 0, absent: 0, percent: `0%`, streak: {} };
+      obj.people[name] = { id, present: 0, absent: 0, percent: `0%`, streak: {} };
     }
 
     let person = obj.people[name];

@@ -34,3 +34,16 @@ export async function getLocation(locationId) {
       return err;
     });
 }
+
+export async function getAccount(uId) {
+  const url = `${api_host}/accounts/${uId}`;
+
+  return await axios
+    .get(url, {}, bearer())
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err;
+    });
+}

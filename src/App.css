@@ -112,8 +112,6 @@
   }
 }
 
-
-
 .detailsBox .inner h2 {
   padding-top: 0;
   margin: 0;
@@ -307,4 +305,133 @@ a.btn {
 .signature {
   background-color: #2b2b2b;
   height: 100vh;
+}
+
+
+/* Account */
+.account-card {
+
+}
+
+.account-card .fields {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 10px !important;
+  /*margin-left:5px;*/
+  text-align: center;
+  /* end account details */
+}
+.account-card .fields .account-details {
+  text-align: left;
+  /* http://flexbox.io/#/view/DzAacFWSx0c */
+  /* flex-grow, flex-shrink and flex-basis */
+  flex: 1 0 250px;
+  /* 400px */
+  max-width: 100%;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  /*margin:5px;*/
+  margin-bottom: 5px;
+  margin-left: 5px;
+  background-color: #fff;
+}
+.account-card .fields .account-details label {
+  display: inline-block;
+  /*flex: 1 0 150px;*/
+  text-align: left;
+  min-width: 60px;
+  margin: 0 8px 0 0;
+  padding: 2px 0;
+  color:  rgba(0, 0, 0, 0.8);
+}
+.account-card .fields .account-details p {
+  display: inline-block;
+  flex: 2 0;
+  max-width: 75%;
+  margin: 2px;
+  color: rgba(0, 0, 0, 0.87059);
+}
+.account-card .fields .account-details .account-type-details-holder {
+  display: flex;
+  flex-flow: row wrap;
+}
+.account-card .fields .account-details .account-type {
+  background-color: #ffc400;
+  padding: 5px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+.account-card .fields .account-details .account-type-details {
+  flex: 2 0 auto;
+  /* 400px */
+  max-width: 100%;
+}
+.account-card .fields .account-details .account-type-details div label {
+  vertical-align: top;
+}
+.account-card .fields .account-details .child {
+  background-color: #651fff;
+}
+.account-card .fields .account-details .doctor {
+  background-color: #00c853;
+}
+.account-card .fields .account-details .account-type-image {
+  flex: 1 0 100px;
+  align-self: center;
+  text-align: center;
+}
+.account-card .fields .account-details .account-type-avatar {
+  width: 75px !important;
+  height: 75px !important;
+}
+.account-card .fields .account-details fieldset {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.account-card .fields .account-details legend {
+  color: #651fff;
+}
+
+@media all and (max-width: 673px) {
+  .list-avatar {
+    display: none !important;
+  }
+
+  .note-text {
+    margin-left: 10px !important;
+    margin-top:-20px;
+  }
+
+  .list-search .list-search-box {
+    width: 90% !important;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .list-search {
+    float: none !important;
+  }
+
+  .list-details-h2 {
+    display: none;
+  }
+
+  .dialog-h3 {
+    display: none !important;
+  }
+
+  .account-card .fields {
+    /*
+    .account-details{
+      flex: 1 0 auto;
+    }
+    */
+  }
+  .account-card .fields .account-type-image {
+    margin-top: 20px;
+  }
+  .account-card .fields .account-type-avatar {
+    width: 10px;
+    height: 10px;
+  }
 }
