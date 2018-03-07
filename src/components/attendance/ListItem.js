@@ -33,10 +33,14 @@ class ListItem extends Component {
             <div className="name">
               <span>{firstLast[0]}</span> <span>{firstLast[1]}</span>
             </div>
-            <Target>
+
+            {onClick !== false && <Target>
               {/* Gear Icon to toggle settings menu */}
               <SettingsToggle item={item} onClick={onClick} />
             </Target>
+            }
+
+
           </div>
 
           <SelectedOptions item={item} />

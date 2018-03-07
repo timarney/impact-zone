@@ -9,6 +9,7 @@ import { attendanceList } from "../../actions";
 import { syncPeople, now } from "../../api/sync";
 import { getLocationName } from "../../util";
 import ListItem from "./ListItem";
+import Volunteer from "./volunteer/Volunteer";
 
 export class Attendance extends Component {
   componentDidMount() {
@@ -99,6 +100,7 @@ export class Attendance extends Component {
             {DateTime.fromISO(date).toFormat("LLL dd yyyy")}
           </h2>
           <div className="people-list">{this.getListItems()}</div>
+          <Volunteer />
         </div>
       </div>
     );

@@ -111,3 +111,7 @@ export const getPersonData = async function (locationId, date, id, prop, val) {
 export function checkIn(locationId, date, id, val) {
   updatePersonProp(locationId, date, id, "in", val);
 }
+
+export function checkInVolunteer() {
+  alert("coming soon");
+}

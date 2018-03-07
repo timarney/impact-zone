@@ -47,3 +47,16 @@ export async function getAccount(uId) {
       return err;
     });
 }
+
+export async function getVolunteers() {
+  const url = `${api_host}/volunteers`;
+
+  return await axios
+    .get(url, {}, bearer())
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err;
+    });
+}
