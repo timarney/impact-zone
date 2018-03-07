@@ -112,6 +112,13 @@ export function checkIn(locationId, date, id, val) {
   updatePersonProp(locationId, date, id, "in", val);
 }
 
-export function checkInVolunteer() {
-  alert("coming soon");
+export function checkInVolunteer(locationId, date, id, val) {
+  try {
+    const ref = firebase.database().ref(`${locationId}/${date}`);
+    ref.child("volunteers").set(val);
+  } catch (e) {
+    console.log(e.message);
+    console.log(locationId, date, id, val);
+  }
+  //
 }

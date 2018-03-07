@@ -87,6 +87,11 @@ export class Attendance extends Component {
 
   render() {
     const { locationId, date } = this.props;
+    let activeItems = this.props.attendance && this.props.attendance.volunteers ? this.props.attendance.volunteers : "";
+
+    if (activeItems) {
+      activeItems = activeItems.split(",");
+    }
 
     return (
       <div className="App">
@@ -100,7 +105,7 @@ export class Attendance extends Component {
             {DateTime.fromISO(date).toFormat("LLL dd yyyy")}
           </h2>
           <div className="people-list">{this.getListItems()}</div>
-          <Volunteer />
+          <Volunteer activeItems={activeItems} locationId={locationId} date={date} />
         </div>
       </div>
     );

@@ -4,10 +4,28 @@ import { checkInVolunteer } from "../../../util/firebase";
 import { connect } from "react-redux";
 import classNames from "classnames";
 
+
+function updateArr(vals, val, active) {
+  val = String(val);
+  if (!active) {
+    var index = vals.indexOf(val);
+    if (index > -1) {
+      vals.splice(index, 1);
+    }
+  } else {
+    vals.push(val);
+  }
+
+  //remove dups
+  vals = [...new Set(vals)];
+
+  return vals.join(",");
+}
+
 class CheckIn extends Component {
   state = {};
   render() {
-    const { item, locationId, date, disabled } = this.props;
+    const { item, locationId, date, disabled, activeItems } = this.props;
     const checkedClass = classNames({
       check: true,
       checked: item.in
@@ -23,7 +41,9 @@ class CheckIn extends Component {
             ? null
             : e => {
               e.preventDefault();
-              checkInVolunteer(locationId, date, item.id, !item.in);
+              const active = !item.in;
+              const val = updateArr(activeItems, item.id, active);
+              checkInVolunteer(locationId, date, item.id, val);
             }
         }
       >

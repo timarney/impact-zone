@@ -9,21 +9,30 @@ class Volunteer extends Component {
         this.setState({ volunteers: volunteers.data });
     }
     render() {
+        const { locationId, date, activeItems } = this.props;
         const { volunteers } = this.state;
         if (!volunteers.length) {
-            return <div>loading </div>
+            return <div></div>
         }
 
         const list = volunteers.map((item) => {
             item.id = item.value;
             item.name = item.label;
+            item.in = false;
+            let active = false;
+            if (activeItems.includes(String(item.id))) {
+                item.in = true;
+                active = true;
+            }
+
             return <ListItem
-                active={false}
+                active={active}
+                activeItems={activeItems}
                 onClick={false}
                 key={item.id}
                 item={item}
-                locationId={false}
-                date={false}
+                locationId={locationId}
+                date={date}
             />
         });
 

@@ -6,7 +6,7 @@ import CheckIn from "./CheckIn";
 class ListItem extends Component {
   state = {};
   render() {
-    const { item, locationId, date, active, disabled } = this.props;
+    const { item, locationId, date, active, disabled, activeItems } = this.props;
     const firstLast = item.name.split(" ");
     const isActiveItem = active === item.id;
     const boxClass = classNames({
@@ -23,7 +23,7 @@ class ListItem extends Component {
     return (
       <div disabled={disableItem} className={boxClass}>
         <div className="attendance-person">
-          <CheckIn item={item} locationId={locationId} date={date} />
+          <CheckIn activeItems={activeItems} item={item} locationId={locationId} date={date} />
           <div className="name">
             <span>{firstLast[0]}</span> <span>{firstLast[1]}</span>
           </div>

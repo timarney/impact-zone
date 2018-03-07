@@ -1,6 +1,8 @@
 ## Attendance Manager App
 
 - WIP
+- This is being coded in my "spare time" for a charity
+- budget $0
 
 ### Required Enviroment Variables
 
