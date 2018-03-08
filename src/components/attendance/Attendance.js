@@ -10,8 +10,13 @@ import { syncPeople, now } from "../../api/sync";
 import { getLocationName } from "../../util";
 import ListItem from "./ListItem";
 import Volunteer from "./volunteer/Volunteer";
+import SearchFilter from "./search/SearchFilter";
+
+const filter = { filter_in: true, filter_out: true, term: "" };
 
 export class Attendance extends Component {
+  state = { peopleFilter: filter };
+
   componentDidMount() {
     const { locationId, date, attendanceList } = this.props;
     if (date === now) {
@@ -40,6 +45,7 @@ export class Attendance extends Component {
 
   getListItems() {
     const { locationId, date, activeItem } = this.props;
+    const s = this.state.peopleFilter;
     let accounts = this.props.attendance;
     if (!accounts || typeof accounts.people !== "object") {
       return null;
@@ -49,19 +55,12 @@ export class Attendance extends Component {
 
     Items = Object.values(accounts.people)
       .filter(item => {
-        const s = {};
-        s.term = "a";
         let term = s.term.toLowerCase();
         if (term === "") return true;
         let str = item.name.toLowerCase();
         return str.search(term) > -1;
       })
       .filter(item => {
-        const s = {};
-        //filters
-        s.filter_in = true;
-        s.filter_out = true;
-
         if (s.filter_in && s.filter_out) return true;
         if (s.filter_in && item.in) return true;
         if (s.filter_out && !item.in) return true;
@@ -104,7 +103,15 @@ export class Attendance extends Component {
             Attendance - {getLocationName(locationId)} -{" "}
             {DateTime.fromISO(date).toFormat("LLL dd yyyy")}
           </h2>
-          <div className="people-list">{this.getListItems()}</div>
+
+          <div>
+            <SearchFilter handleFilter={(filter) => {
+              this.setState({ peopleFilter: filter });
+            }} />
+            <div className="people-list">
+              {this.getListItems()}
+            </div>
+          </div>
           <Volunteer activeItems={activeItems} locationId={locationId} date={date} />
         </div>
       </div>

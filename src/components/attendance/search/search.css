@@ -1,0 +1,31 @@
+.search-filter{
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+    color:#b4b4b4;
+    align-items: center;
+}
+
+.search-input{
+    border:none;
+    border-bottom:1px solid #b4b4b4;
+    background-color: transparent;
+}
+
+.search-input:focus{
+    color:green;
+    outline: thin dotted;
+}
+
+
+.search-filter input{
+    padding:5px 10px;
+    font-size:1em;
+    line-height: 1em;
+    color:#b4b4b4;
+}
+
+.search-filter div{
+   margin-right:10px;
+}
+

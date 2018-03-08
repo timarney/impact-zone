@@ -6,6 +6,10 @@ import classNames from "classnames";
 
 
 function updateArr(vals, val, active) {
+  console.log("updateArr", vals);
+  if (!vals) {
+    vals = [];
+  }
   val = String(val);
   if (!active) {
     var index = vals.indexOf(val);
@@ -19,13 +23,18 @@ function updateArr(vals, val, active) {
   //remove dups
   vals = [...new Set(vals)];
 
-  return vals.join(",");
+  if (vals.length) {
+    return vals.join(",");
+  }
+
+  return "";
 }
 
 class CheckIn extends Component {
   state = {};
   render() {
     const { item, locationId, date, disabled, activeItems } = this.props;
+
     const checkedClass = classNames({
       check: true,
       checked: item.in
