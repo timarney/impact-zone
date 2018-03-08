@@ -21,8 +21,10 @@ class SearchFilter extends Component {
         return (
             <div className="search-filter">
                 <div><input name="term" value={term} className="search-input" type="text" placeholder="Search" onChange={this.handleInputChange} /></div>
-                <div><input name="filter_in" checked={filter_in} type="checkbox" onChange={this.handleInputChange} /> Present</div>
-                <div><input name="filter_out" checked={filter_out} type="checkbox" onChange={this.handleInputChange} /> Absent</div>
+                <div className="checkboxes">
+                    <div><input name="filter_in" checked={filter_in} type="checkbox" onChange={this.handleInputChange} /> Present</div>
+                    <div><input name="filter_out" checked={filter_out} type="checkbox" onChange={this.handleInputChange} /> Absent</div>
+                </div>
             </div>
         )
     }

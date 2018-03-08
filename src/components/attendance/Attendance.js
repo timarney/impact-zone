@@ -112,6 +112,7 @@ export class Attendance extends Component {
               {this.getListItems()}
             </div>
           </div>
+          <hr className="dashed" />
           <Volunteer activeItems={activeItems} locationId={locationId} date={date} />
         </div>
       </div>

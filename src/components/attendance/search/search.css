@@ -6,6 +6,28 @@
     align-items: center;
 }
 
+.checkboxes{
+    display: flex;
+}
+
+hr.dashed{
+    margin-top: 50px;
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background:transparent;
+}
+
+@media screen and (max-width: 400px) {
+    .search-filter{
+        flex-direction: column;
+    }
+
+    .checkboxes{
+        margin-top:10px;
+    }
+}
+
+
 .search-input{
     border:none;
     border-bottom:1px solid #b4b4b4;
@@ -13,8 +35,8 @@
 }
 
 .search-input:focus{
-    color:green;
-    outline: thin dotted;
+    color:#b4b4b4;
+    outline: none;
 }
 
 
