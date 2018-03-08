@@ -11,6 +11,7 @@ import { getLocationName } from "../../util";
 import ListItem from "./ListItem";
 import Volunteer from "./volunteer/Volunteer";
 import SearchFilter from "./search/SearchFilter";
+import Details from "./details/Details";
 
 const filter = { filter_in: true, filter_out: true, term: "" };
 
@@ -85,7 +86,11 @@ export class Attendance extends Component {
   //
 
   render() {
-    const { locationId, date } = this.props;
+    const { locationId, date, speaker = "", activity = "" } = this.props;
+
+    console.log("activity", activity);
+
+
     let activeItems = this.props.attendance && this.props.attendance.volunteers ? this.props.attendance.volunteers : "";
 
     if (activeItems) {
@@ -103,6 +108,8 @@ export class Attendance extends Component {
             Attendance - {getLocationName(locationId)} -{" "}
             {DateTime.fromISO(date).toFormat("LLL dd yyyy")}
           </h2>
+
+          <Details locationId={locationId} date={date} speaker={speaker} activity={activity} />
 
           <div>
             <SearchFilter handleFilter={(filter) => {
@@ -126,6 +133,8 @@ const mapStateToProps = (state, ownProps) => {
     date: ownProps.match.params.date,
     attendance: state.main.attendance,
     activeItem: state.main.activeItem,
+    speaker: state.main.attendance.speaker,
+    activity: state.main.attendance.activity,
     disabled: state.main.disabled
   };
 };

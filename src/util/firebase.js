@@ -78,6 +78,11 @@ export function removeRef(id) {
   }
 }
 
+export const updateProp = function (locationId, date, prop, val) {
+  const ref = firebase.database().ref(`${locationId}/${date}`);
+  ref.child(prop).set(val);
+}
+
 export const updatePersonProp = function (locationId, date, id, prop, val) {
   if (!prop) {
     console.error("No prop passed to update", prop);
