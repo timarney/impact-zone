@@ -59,6 +59,12 @@ h2 {
   color: #858989;
 }
 
+.week-items{
+  max-height:320px;
+  overflow-x:scroll;
+  padding-right:30px;
+}
+
 .weeks h2 {
   margin-bottom: 20px;
 }

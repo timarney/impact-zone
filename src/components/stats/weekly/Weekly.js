@@ -33,7 +33,7 @@ class Weekly extends Component {
     return (
       <div className="weeks">
         <h2 className={headerClass}>{title}</h2>
-        <div>
+        <div className="week-items">
           {outlineItems.map((item, index) => {
             return (
               <div className="loader" key={index}>
@@ -68,7 +68,7 @@ class Weekly extends Component {
             <Link to={`/attendance/${locationId}/${date}`}>{f}</Link>
           </div>
           <div>{`${p}%`}</div>
-          {/*  <a href={`remove/${date}`} id={date} onClick={this.deleteItem}>
+          { /*<a href={`remove/${date}`} id={date} onClick={this.deleteItem}>
             delete
       </a> */}
         </div>
@@ -80,7 +80,7 @@ class Weekly extends Component {
     return (
       <div className="weeks">
         <h2 className={headerClass}>{title}</h2>
-        <div>{d}</div>
+        <div className="week-items">{d}</div>
       </div>
     );
   }
