@@ -309,17 +309,13 @@ a.btn {
 
 
 /* Account */
-.account-card {
-
-}
-
 .account-card .fields {
   display: flex;
   flex-flow: row wrap;
-  padding: 10px !important;
   /*margin-left:5px;*/
   text-align: center;
   /* end account details */
+  font-size:0.9em;
 }
 .account-card .fields .account-details {
   text-align: left;
@@ -333,7 +329,7 @@ a.btn {
   /*margin:5px;*/
   margin-bottom: 5px;
   margin-left: 5px;
-  background-color: #fff;
+  background-color:rgba(0, 0, 0, 0.1);
 }
 .account-card .fields .account-details label {
   display: inline-block;
@@ -342,21 +338,22 @@ a.btn {
   min-width: 60px;
   margin: 0 8px 0 0;
   padding: 2px 0;
-  color:  rgba(0, 0, 0, 0.8);
+  color: rgb(102, 102, 102);
 }
 .account-card .fields .account-details p {
   display: inline-block;
   flex: 2 0;
   max-width: 75%;
   margin: 2px;
-  color: rgba(0, 0, 0, 0.87059);
+  
+  color: rgba(255, 255, 255, 0.4);
 }
 .account-card .fields .account-details .account-type-details-holder {
   display: flex;
   flex-flow: row wrap;
 }
 .account-card .fields .account-details .account-type {
-  background-color: #ffc400;
+  background-color: rgba(102, 194, 121, 0.8);
   padding: 5px;
   margin-bottom: 5px;
   color: #fff;
@@ -370,7 +367,7 @@ a.btn {
   vertical-align: top;
 }
 .account-card .fields .account-details .child {
-  background-color: #651fff;
+  background-color: rgb(102, 194, 121);
 }
 .account-card .fields .account-details .doctor {
   background-color: #00c853;
@@ -386,9 +383,11 @@ a.btn {
 }
 .account-card .fields .account-details fieldset {
   border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top:20px;
 }
 .account-card .fields .account-details legend {
-  color: #651fff;
+  /* color: #651fff; */
+  color: #666666;
 }
 
 @media all and (max-width: 673px) {

@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { DateTime } from "luxon";
 import { detailsBoxTransition, detailsBoxProps } from "../../../transition";
 import AccountCard from "../../account/AccountCard";
+import Calendar from "../calendar/Calendar";
 
 class List extends Component {
   refs = {};
@@ -60,6 +61,7 @@ class List extends Component {
   renderItem(item, index) {
     let key = item.name ? item.name : index;
     let percent = item.percent ? `${item.percent} %` : null;
+
     return (
       <ListItem
         key={key}
@@ -95,21 +97,33 @@ class List extends Component {
     const { items } = this.props;
     const item = this.state.activeItem;
     if (!item) return null;
-    let d = [];
+    //let d = [];
+
+    let dObj = {};
 
     for (let key in items) {
-      let f = DateTime.fromISO(key).toFormat("ccc dd LLL yyyy");
+      //let f = DateTime.fromISO(key).toFormat("ccc dd LLL yyyy");
+      let YMD = DateTime.fromISO(key).toFormat("yyyy-MM-dd");
+
+      dObj[YMD] = false;
+
+
       let obj = items[key].people;
+
+      /*
       let attend = (
         <span style={{ color: "rgb(254, 115, 123)", marginRight: "15px" }}>
           ✘
         </span>
       );
+      */
 
       // eslint-disable-next-line
       for (let [k, v] of Object.entries(obj)) {
         if (v.name === item.name) {
           if (v.in) {
+            dObj[YMD] = true;
+            /*
             attend = (
               <span
                 style={{ color: "rgb(102, 194, 121)", marginRight: "15px" }}
@@ -117,10 +131,12 @@ class List extends Component {
                 ✔
               </span>
             );
+            */
           }
         }
       }
 
+      /*
       d.push(
         <div className="week" key={key}>
           <div>
@@ -128,6 +144,7 @@ class List extends Component {
           </div>
         </div>
       );
+      */
     }
 
     return (
@@ -136,14 +153,14 @@ class List extends Component {
           <div className="close-details" />
           <div className="details-header">
             <h2>{item.name}</h2>
-            <button className="btn" onClick={this.closeDetails}>
+            <button style={{ marginBottom: "20px" }} className="btn" onClick={this.closeDetails}>
               CLOSE
             </button>
           </div>
 
           <div className="details-inner">
             <div className="weeks">
-              {d.reverse()}
+              <Calendar dates={dObj} />
             </div>
             <div className="details">
               <AccountCard uid={item.id} />

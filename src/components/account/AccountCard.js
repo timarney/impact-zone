@@ -111,6 +111,10 @@ export default class AccountCard extends Component {
     render() {
         let item = this.state.data;
 
+        if (!item) {
+            return null;
+        }
+
         if (_isUndefined(item.child_name)) {
             return <div>loading</div>;
         }

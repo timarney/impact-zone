@@ -89,3 +89,20 @@ export function initAttendance() {
   attendance.dates = {};
   return attendance;
 }
+
+/*
+const dates = {
+    "2018-02-20": false,
+    "2018-02-27": false,
+    "2018-03-06": true
+}
+*/
+export function datesToCal(obj) {
+  const dates = Object.keys(obj);
+
+  const attendance = dates.filter(function (key) {
+    return obj[key]
+  });
+
+  return { dates, attendance };
+}
