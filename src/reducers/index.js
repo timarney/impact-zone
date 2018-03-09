@@ -9,6 +9,20 @@ const authReducer = (state = { isAuthenticated: false }, action) => {
   }
 };
 
+const statDetailsReducer = (state = { isOpen: false }, action) => {
+
+  switch (action.type) {
+    case "OPENED_STATS_DETAILS":
+      return { ...state, isOpen: true };
+    case "CLOSED_STATS_DETAILS":
+      return { ...state, isOpen: false };
+    default:
+      return state;
+
+  }
+
+}
+
 const setDisabled = id => {
   if (id) {
     return true;
@@ -49,5 +63,6 @@ const attendanceReducer = (
 
 export const rootReducer = combineReducers({
   auth: authReducer,
-  main: attendanceReducer
+  main: attendanceReducer,
+  statDetails: statDetailsReducer
 });

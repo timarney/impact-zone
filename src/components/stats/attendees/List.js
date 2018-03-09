@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Animated from "animated/lib/targets/react-dom";
 import sortbyorder from "lodash.sortbyorder";
 import { tempItems } from "../../../util/skelton";
@@ -74,22 +75,27 @@ class List extends Component {
 
   openDetails = (e, item) => {
     let { animation } = this.state;
+    const { dispatch } = this.props;
     let y = this.el.getBoundingClientRect();
     let x = e.getBoundingClientRect();
 
     detailsBoxTransition(x, y, animation, "up");
 
-    this.setState({ activeItem: item });
+    this.setState({ activeItem: item }, () => {
+      dispatch({ type: "OPENED_STATS_DETAILS", payload: true })
+    });
   };
 
   closeDetails = () => {
     let { animation } = this.state;
+    const { dispatch } = this.props;
     let x = animation.activeBox;
 
     if (!x) return;
 
     detailsBoxTransition(null, x, animation, null, () => {
       animation.y.setValue(-500);
+      dispatch({ type: "CLOSED_STATS_DETAILS", payload: true });
     });
   };
 
@@ -97,54 +103,22 @@ class List extends Component {
     const { items } = this.props;
     const item = this.state.activeItem;
     if (!item) return null;
-    //let d = [];
-
     let dObj = {};
 
     for (let key in items) {
       //let f = DateTime.fromISO(key).toFormat("ccc dd LLL yyyy");
       let YMD = DateTime.fromISO(key).toFormat("yyyy-MM-dd");
-
-      dObj[YMD] = false;
-
-
       let obj = items[key].people;
-
-      /*
-      let attend = (
-        <span style={{ color: "rgb(254, 115, 123)", marginRight: "15px" }}>
-          ✘
-        </span>
-      );
-      */
+      dObj[YMD] = false;
 
       // eslint-disable-next-line
       for (let [k, v] of Object.entries(obj)) {
         if (v.name === item.name) {
           if (v.in) {
             dObj[YMD] = true;
-            /*
-            attend = (
-              <span
-                style={{ color: "rgb(102, 194, 121)", marginRight: "15px" }}
-              >
-                ✔
-              </span>
-            );
-            */
           }
         }
       }
-
-      /*
-      d.push(
-        <div className="week" key={key}>
-          <div>
-            {attend} {f}
-          </div>
-        </div>
-      );
-      */
     }
 
     return (
@@ -227,4 +201,9 @@ class List extends Component {
   }
 }
 
-export default List;
+const mapStateToProps = (state, ownProps) => {
+  return {
+  };
+};
+
+export default connect(mapStateToProps)(List);
