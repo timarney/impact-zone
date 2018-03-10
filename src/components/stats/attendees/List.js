@@ -17,11 +17,14 @@ class List extends Component {
   };
 
   componentDidMount() {
-    // window.addEventListener("resize", () => {});
+    window.addEventListener("resize", () => {
+      console.log("resize");
+      this.closeDetails();
+    });
   }
 
   componentWillUnmount() {
-    // window.removeEventListener("resize", this.closeDetails());
+    window.removeEventListener("resize", this.closeDetails());
   }
 
   order() {
@@ -94,6 +97,7 @@ class List extends Component {
 
     detailsBoxTransition(null, x, animation, null, () => {
       animation.y.setValue(-500);
+      this.setState({ activeItem: false });
       dispatch({ type: "CLOSED_STATS_DETAILS", payload: true });
     });
   };
@@ -136,7 +140,7 @@ class List extends Component {
           style={animatedStyle}
           onClick={this.closeDetails}
         >
-          {activeItem && <Details items={attendance} item={activeItem} />}
+          {activeItem && <Details items={this.props.items} item={activeItem} />}
         </Animated.div>
 
         <div

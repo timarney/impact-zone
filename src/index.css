@@ -54,7 +54,7 @@ h2 {
 /* WEEKS */
 
 .weeks {
-  margin: 0 2em;
+  /*margin: 0 1em;*/
   min-width: 200px;
   color: #858989;
 }
@@ -98,7 +98,7 @@ h2 {
 
   .weeks {
     flex: 2;
-    margin: 0 2em;
+    margin: 0 1em;
   }
 
   .weeks h2 {
@@ -110,7 +110,7 @@ h2 {
 
 .people {
   background-color: #2b2b2b;
-  padding-bottom: 50px;
+  padding-bottom: 500px;
 }
 
 .people h2 {
@@ -478,17 +478,20 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height:100vh;
+  height:50vh;
 }
 
 .spinner {
   width: 40px;
   height: 40px;
   background-color: #333;
-
   margin: 100px auto;
   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
   animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+.spinner-white{
+  background-color: #fff;
 }
 
 @-webkit-keyframes sk-rotateplane {

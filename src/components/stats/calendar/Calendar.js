@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Animated from "animated/lib/targets/react-dom";
 import glamorous from "glamorous";
 import { css } from "glamor";
 import format from "date-fns/format";
@@ -11,7 +9,6 @@ import lastDayOfWeek from "date-fns/last_day_of_week";
 import getDay from "date-fns/get_day";
 import eachDay from "date-fns/each_day";
 import differenceInDays from "date-fns/difference_in_days";
-import { datesToCal } from "../../../util/attendance";
 
 css.insert(`
   *,
@@ -135,54 +132,17 @@ class Calendar extends React.Component {
 }
 
 class Cal extends Component {
-    state = { dates: false, attendance: false, val: new Animated.Value(0) }
-
-    fadeIn() {
-        Animated.sequence([
-            Animated.delay(500),
-            Animated.timing(this.state.val, { toValue: 1 })
-        ]).start();
-    }
-
-    componentDidMount() {
-        const { dates } = this.props;
-        const data = datesToCal(dates);
-        this.setState({ dates: data.dates, attendance: data.attendance }, this.fadeIn());
-    }
-
-    componentDidUpdate() {
-        const { isOpen } = this.props;
-        const { val } = this.state;
-        if (!isOpen) {
-            val.setValue(0)
-            return;
-        }
-
-        this.fadeIn();
-    }
-
     render() {
-        const { dates, attendance } = this.state;
+        const { dates, attendance } = this.props;
 
         if (!attendance) return null;
         return (<Container>
-            <Animated.div
-                style={{ opacity: this.state.val }}
-            >
-                <Calendar dates={dates} highlight={attendance} />
-
-            </Animated.div >
+            <Calendar dates={dates} highlight={attendance} />
         </Container>
         )
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        isOpen: state.statDetails.isOpen
-    };
-};
-
-export default connect(mapStateToProps)(Cal);
+export default Cal;
 
 

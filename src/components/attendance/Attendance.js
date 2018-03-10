@@ -87,10 +87,6 @@ export class Attendance extends Component {
 
   render() {
     const { locationId, date, speaker = "", activity = "" } = this.props;
-
-    console.log("activity", activity);
-
-
     let activeItems = this.props.attendance && this.props.attendance.volunteers ? this.props.attendance.volunteers : "";
 
     if (activeItems) {
