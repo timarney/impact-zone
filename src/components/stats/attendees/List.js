@@ -3,18 +3,17 @@ import { connect } from "react-redux";
 import Animated from "animated/lib/targets/react-dom";
 import sortbyorder from "lodash.sortbyorder";
 import { tempItems } from "../../../util/skelton";
-import ListItem from "./ListItem";
 import classNames from "classnames";
-import { DateTime } from "luxon";
 import { detailsBoxTransition, detailsBoxProps } from "../../../transition";
-import AccountCard from "../../account/AccountCard";
-import Calendar from "../calendar/Calendar";
+import ListItem from "./ListItem";
+import Details from "./Details";
 
 class List extends Component {
   refs = {};
   state = {
     animation: detailsBoxProps,
-    activeItem: null
+    activeItem: false,
+    activeDetails: false
   };
 
   componentDidMount() {
@@ -99,55 +98,9 @@ class List extends Component {
     });
   };
 
-  itemDetails = () => {
-    const { items } = this.props;
-    const item = this.state.activeItem;
-    if (!item) return null;
-    let dObj = {};
-
-    for (let key in items) {
-      //let f = DateTime.fromISO(key).toFormat("ccc dd LLL yyyy");
-      let YMD = DateTime.fromISO(key).toFormat("yyyy-MM-dd");
-      let obj = items[key].people;
-      dObj[YMD] = false;
-
-      // eslint-disable-next-line
-      for (let [k, v] of Object.entries(obj)) {
-        if (v.name === item.name) {
-          if (v.in) {
-            dObj[YMD] = true;
-          }
-        }
-      }
-    }
-
-    return (
-      <div>
-        <div>
-          <div className="close-details" />
-          <div className="details-header">
-            <h2>{item.name}</h2>
-            <button style={{ marginBottom: "20px" }} className="btn" onClick={this.closeDetails}>
-              CLOSE
-            </button>
-          </div>
-
-          <div className="details-inner">
-            <div className="weeks">
-              <Calendar dates={dObj} />
-            </div>
-            <div className="details">
-              <AccountCard uid={item.id} />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   render() {
     const { attendance } = this.props;
-    const { animation } = this.state;
+    const { animation, activeItem } = this.state;
     const headerClass = classNames({
       disabled: attendance === false
     });
@@ -183,7 +136,7 @@ class List extends Component {
           style={animatedStyle}
           onClick={this.closeDetails}
         >
-          <div className="inner">{this.itemDetails()}</div>
+          {activeItem && <Details items={attendance} item={activeItem} />}
         </Animated.div>
 
         <div

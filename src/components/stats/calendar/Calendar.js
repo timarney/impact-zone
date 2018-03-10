@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Animated from "animated/lib/targets/react-dom";
 import glamorous from "glamorous";
 import { css } from "glamor";
 import format from "date-fns/format";
@@ -11,7 +12,6 @@ import getDay from "date-fns/get_day";
 import eachDay from "date-fns/each_day";
 import differenceInDays from "date-fns/difference_in_days";
 import { datesToCal } from "../../../util/attendance";
-import Animated from "animated/lib/targets/react-dom";
 
 css.insert(`
   *,
@@ -135,7 +135,7 @@ class Calendar extends React.Component {
 }
 
 class Cal extends Component {
-    state = { dates: false, attendance: false, val: new Animated.Value(0), }
+    state = { dates: false, attendance: false, val: new Animated.Value(0) }
 
     fadeIn() {
         Animated.sequence([

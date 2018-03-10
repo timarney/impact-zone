@@ -1,28 +1,50 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import Animated from "animated/lib/targets/react-dom";
 import { getAccount } from "../../api";
-let _isUndefined = require("lodash/isUndefined");
 
+const _isUndefined = require("lodash/isUndefined");
 const image_host = "";
 
-export default class AccountCard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { data: false };
-    }
+class AccountCard extends Component {
+    state = { data: false, val: new Animated.Value(0) }
 
     async componentDidMount() {
-        const uId = this.props.uid;
+        const { uId } = this.props;
         const response = await getAccount(uId);
-        this.setState({ data: response.data[0] });
+        this.setState({ data: response.data[0] }, () => {
+            this.fadeIn();
+        });
     }
 
     async componentDidUpdate(prevProps) {
-        if (prevProps.uid === this.props.uid) {
+        const { isOpen, uId } = this.props;
+        const { val } = this.state;
+
+        if (!isOpen) {
+            val.setValue(0);
+        }
+
+        if (prevProps.uId === uId) {
             return;
         }
-        const uId = this.props.uid;
+
         const response = await getAccount(uId);
-        this.setState({ data: response.data[0] });
+
+        if (!response || !response.data) {
+            return;
+        }
+
+        this.setState({ data: response.data[0] }, () => {
+            this.fadeIn();
+        });
+    }
+
+    fadeIn() {
+        Animated.sequence([
+            Animated.delay(500),
+            Animated.timing(this.state.val, { toValue: 1 })
+        ]).start();
     }
 
     /* ---------------------------------------------------------------------------
@@ -143,38 +165,51 @@ export default class AccountCard extends Component {
             );
         }
         return (
-            <div className="account-card">
-                <div className="fields">
-                    <div className="account-details">
-                        <div className="account-type child">Child</div>
-                        <div className="account-type-details-holder">
-                            <div className="account-type-details">
-                                {this.renderRow("Name", item.child_name)}
-                                {this.renderRow("E-mail", item.child_email)}
-                                {this.renderRow("Phone(s)", phones)}
-                                {this.renderRow("Address", item.child_address)}
-                            </div>
-                            {avatar}
-                            <div className="account-type-details">
-                                <fieldset>
-                                    <legend>Doctor Information</legend>
-                                    {this.renderRow("Name", item.child_doctors_name)}
-                                    {this.renderRow("Number", item.child_doctors_number)}
-                                    {this.renderRow("OHIP #", item.child_ohip)}
-                                    {this.renderRow(
-                                        "Medical Conditions",
-                                        item.child_medical_conditions
-                                    )}
-                                    {this.renderRow("Drugs", item.child_drugs)}
-                                    {this.renderRow("Notes", item.child_notes)}
-                                    {this.renderRow("Allergies", item.child_allergies)}
-                                </fieldset>
+            <Animated.div
+                style={{ opacity: this.state.val }}
+            >
+                <div className="account-card">
+                    <div className="fields">
+                        <div className="account-details">
+                            <div className="account-type child">Child</div>
+                            <div className="account-type-details-holder">
+                                <div className="account-type-details">
+                                    {this.renderRow("Name", item.child_name)}
+                                    {this.renderRow("E-mail", item.child_email)}
+                                    {this.renderRow("Phone(s)", phones)}
+                                    {this.renderRow("Address", item.child_address)}
+                                </div>
+                                {avatar}
+                                <div className="account-type-details">
+                                    <fieldset>
+                                        <legend>Doctor Information</legend>
+                                        {this.renderRow("Name", item.child_doctors_name)}
+                                        {this.renderRow("Number", item.child_doctors_number)}
+                                        {this.renderRow("OHIP #", item.child_ohip)}
+                                        {this.renderRow(
+                                            "Medical Conditions",
+                                            item.child_medical_conditions
+                                        )}
+                                        {this.renderRow("Drugs", item.child_drugs)}
+                                        {this.renderRow("Notes", item.child_notes)}
+                                        {this.renderRow("Allergies", item.child_allergies)}
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
+                        {guardians}
                     </div>
-                    {guardians}
                 </div>
-            </div>
+
+            </Animated.div>
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isOpen: state.statDetails.isOpen
+    };
+};
+
+export default connect(mapStateToProps)(AccountCard);
