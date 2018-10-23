@@ -26,7 +26,7 @@ export class Login extends React.Component {
 
   render() {
     const { from } = this.props.location.state || {
-      from: { pathname: "/stats/25" }
+      from: { pathname: "/stats/31" }
     };
 
     const { redirectToReferrer, err } = this.state;
